@@ -3,442 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Windows Enterprise Academy - Curs Corectat (RO/EN)</title>
-  <meta name="description" content="Portal de invatare aliniat pe cursurile furnizate: Windows Server 2022, Windows 11 Syllabus, Azure Introductie. Teorie + pasi + verificare + PowerShell." />
+  <title>Enterprise IT Learning Portal</title>
+  <meta name="description" content="Portal complet de invatare: Windows Server 2022, Windows 11, Azure, Microsoft 365, PowerShell, CMD si Troubleshooting." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <strong>Windows Enterprise Academy</strong>
-      <span class="ro">Versiune corectata pe syllabus-ul tau</span>
-      <span class="en">Corrected version based on your exact syllabus</span>
+      <strong>Enterprise IT Learning Portal</strong>
+      <span>Windows Server 2022 | Windows 11 | Azure | M365 | PowerShell</span>
     </div>
-    <div class="top-actions">
-      <input id="lessonSearch" type="search" placeholder="Cauta lectie / Search lesson" />
+    <div class="actions">
+      <input id="globalSearch" type="search" placeholder="Cauta capitol, comanda, topic..." />
       <button id="langToggle" class="lang-btn">EN</button>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero card" id="top">
-      <h1 class="ro">Curriculum Aliniat pe Materialele Tale</h1>
-      <h1 class="en">Curriculum Aligned to Your Materials</h1>
-      <p class="ro">Structura de mai jos respecta direct fisierele din cursurile tale: <strong>Windows Server 2022</strong>, <strong>Windows 11 Syllabus V24H2</strong> si <strong>Azure Introductie 2024-12</strong>.</p>
-      <p class="en">The structure below directly follows your course files: <strong>Windows Server 2022</strong>, <strong>Windows 11 Syllabus V24H2</strong>, and <strong>Azure Introductie 2024-12</strong>.</p>
-      <div class="pill-row">
-        <span class="pill">Teorie / Theory</span>
-        <span class="pill">Pasi / Steps</span>
-        <span class="pill">Verificare / Validation</span>
-        <span class="pill">PowerShell</span>
-      </div>
-    </section>
+  <div class="layout">
+    <aside class="sidebar">
+      <a href="#server">Windows Server 2022</a>
+      <a href="#win11">Windows 11</a>
+      <a href="#azure">Azure</a>
+      <a href="#m365">Microsoft 365</a>
+      <a href="#powershell">PowerShell</a>
+      <a href="#cmd">CMD utile</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#materials">Materiale sursa</a>
+    </aside>
 
-    <section class="section" id="ws2022">
-      <div class="section-head">
-        <h2>Windows Server 2022 (Exact pe cele 9 PDF-uri)</h2>
-      </div>
-      <div class="lesson-grid">
-        <article class="lesson card" data-search="00 inleiding windows client versus server edities interface cerinte lab schema">
-          <h3>00 - Inleiding / Introducere</h3>
-          <label><input type="checkbox" data-progress="ws00" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> diferenta dintre Windows Client si Windows Server, editii, tipuri de interfata, cerinte minime, schema laborator.</p>
-          <p class="en"><strong>Meaning:</strong> differences between Windows Client and Windows Server, editions, interface types, minimum requirements, lab topology.</p>
-          <p class="ro"><strong>Pasi:</strong> valideaza hardware, alege editia, documenteaza topologia de laborator.</p>
-          <p class="en"><strong>Steps:</strong> validate hardware, select edition, document lab topology.</p>
-          <pre><code>Get-ComputerInfo | Select CsName,WindowsProductName,OsHardwareAbstractionLayer
-systeminfo
-Get-NetAdapter</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> ai minim 1 VM Server cu resurse conforme si plan de retea clar.</p>
-          <p class="verify en"><strong>Validation:</strong> you have at least one compliant Server VM and a clear network plan.</p>
-        </article>
+    <main class="content">
+      <section class="hero card">
+        <h1 class="ro">Manual complet pe cursuri, fara scurtaturi</h1>
+        <h1 class="en">Complete course-aligned manual, no shortcuts</h1>
+        <p class="ro">Structura urmeaza cursurile tale in ordinea ceruta: Windows Server 2022, Windows 11, Azure, apoi sectiuni dedicate pentru Microsoft 365, PowerShell, CMD si troubleshooting.</p>
+        <p class="en">This structure follows your courses in the required order: Windows Server 2022, Windows 11, Azure, then dedicated Microsoft 365, PowerShell, CMD and troubleshooting sections.</p>
+      </section>
 
-        <article class="lesson card" data-search="01 opzettendomein active directory domain services forest domain ou kerberos dns dhcp">
-          <h3>01 - OpzettenDomein / Domeniu AD DS</h3>
-          <label><input type="checkbox" data-progress="ws01" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> AD DS, forests, domains, OUs, FSMO, autentificare Kerberos, functional levels.</p>
-          <p class="en"><strong>Meaning:</strong> AD DS, forests, domains, OUs, FSMO roles, Kerberos authentication, functional levels.</p>
-          <p class="ro"><strong>Pasi:</strong> instaleaza rolurile AD DS/DNS, promoveaza DC, valideaza replicare si DNS intern.</p>
-          <p class="en"><strong>Steps:</strong> install AD DS/DNS roles, promote DC, validate replication and internal DNS.</p>
-          <pre><code>Install-WindowsFeature AD-Domain-Services,DNS -IncludeManagementTools
-Install-ADDSForest -DomainName "academy.local" -DomainNetbiosName "ACADEMY"
-Get-ADForest
-Get-ADDomain
-dcdiag /v</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> login in domeniu functioneaza, rezolvarea DNS interna raspunde corect.</p>
-          <p class="verify en"><strong>Validation:</strong> domain sign-in works and internal DNS resolution is correct.</p>
-        </article>
-
-        <article class="lesson card" data-search="02 accounts objecten in ad security principals ou aduc rsat users groups delegation">
-          <h3>02 - Accounts / Obiecte in AD</h3>
-          <label><input type="checkbox" data-progress="ws02" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> security principals, OU planning, ADUC, RSAT, users/groups/computers, delegare.</p>
-          <p class="en"><strong>Meaning:</strong> security principals, OU planning, ADUC, RSAT, users/groups/computers, delegation.</p>
-          <p class="ro"><strong>Pasi:</strong> proiecteaza OUs, creeaza utilizatori/grupuri, deleaga control pe OU unde este necesar.</p>
-          <p class="en"><strong>Steps:</strong> design OUs, create users/groups, delegate OU control where needed.</p>
-          <pre><code>New-ADOrganizationalUnit -Name "Workstations" -Path "DC=academy,DC=local"
-New-ADUser -Name "Ana Pop" -SamAccountName apop -Enabled $true -AccountPassword (ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force)
-New-ADGroup -Name "GG-Helpdesk" -GroupScope Global -GroupCategory Security
-Get-ADUser -Filter * -SearchBase "OU=Workstations,DC=academy,DC=local"</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> obiectele apar in OU-urile corecte si drepturile delegate functioneaza.</p>
-          <p class="verify en"><strong>Validation:</strong> objects are in the right OUs and delegated rights work as expected.</p>
-        </article>
-
-        <article class="lesson card" data-search="03 file server ntfs encryptie quota share smb permissions fsrm">
-          <h3>03 - File Server</h3>
-          <label><input type="checkbox" data-progress="ws03" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> NTFS permissions, ownership, encryption, quotas, file sharing, role File Server.</p>
-          <p class="en"><strong>Meaning:</strong> NTFS permissions, ownership, encryption, quotas, file sharing, File Server role.</p>
-          <p class="ro"><strong>Pasi:</strong> creeaza structura share, aplica model AGDLP, configureaza quota/FSRM.</p>
-          <p class="en"><strong>Steps:</strong> build share structure, apply AGDLP model, configure quota/FSRM.</p>
-          <pre><code>Install-WindowsFeature FS-FileServer,FS-Resource-Manager -IncludeManagementTools
-New-Item -Path C:\Shares\Finance -ItemType Directory
-New-SmbShare -Name Finance$ -Path C:\Shares\Finance -FullAccess "Domain Admins"
-icacls C:\Shares\Finance /grant "ACADEMY\GG-Finance-RW:(OI)(CI)M"
-Get-SmbShare</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> utilizatorii vad doar ce trebuie si cota de spatiu este aplicata.</p>
-          <p class="verify en"><strong>Validation:</strong> users only access allowed data and storage quota is enforced.</p>
-        </article>
-
-        <article class="lesson card" data-search="04 gebruikersomgeving roaming profiles home folders logon scripts gpo">
-          <h3>04 - Gebruikersomgeving / User Environment</h3>
-          <label><input type="checkbox" data-progress="ws04" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> home folders, roaming profiles, logon scripts, Group Policy theory and processing order.</p>
-          <p class="en"><strong>Meaning:</strong> home folders, roaming profiles, logon scripts, Group Policy theory and processing order.</p>
-          <p class="ro"><strong>Pasi:</strong> configureaza profil/homedrive, creeaza GPO baseline, aplica filtering (security/WMI).</p>
-          <p class="en"><strong>Steps:</strong> configure profile/homedrive, create baseline GPO, apply security/WMI filtering.</p>
-          <pre><code>New-GPO -Name "Baseline-Users"
-New-GPLink -Name "Baseline-Users" -Target "OU=Users,DC=academy,DC=local"
-Set-ADUser apop -HomeDirectory "\\SRV-DC01\Users$\apop" -HomeDrive "H:"
-gpupdate /force
-gpresult /r</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> politicile se aplica in ordinea corecta, utilizatorul are mediul standardizat.</p>
-          <p class="verify en"><strong>Validation:</strong> policies apply in the right order and user environment is standardized.</p>
-        </article>
-
-        <article class="lesson card" data-search="05 printerbeheer print management deploy printers permissions drivers queues">
-          <h3>05 - Printerbeheer / Print Management</h3>
-          <label><input type="checkbox" data-progress="ws05" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> print server centralizat, cozi, drivere, drepturi, deploy prin GPO.</p>
-          <p class="en"><strong>Meaning:</strong> centralized print server, queues, drivers, permissions, GPO deployment.</p>
-          <p class="ro"><strong>Pasi:</strong> adauga imprimanta, configureaza ACL, publica/deploy catre grupurile tinta.</p>
-          <p class="en"><strong>Steps:</strong> add printer, configure ACL, publish/deploy to target groups.</p>
-          <pre><code>Install-WindowsFeature Print-Server -IncludeManagementTools
-Get-Printer
-Add-PrinterPort -Name "IP_192.168.10.50" -PrinterHostAddress "192.168.10.50"
-Add-Printer -Name "HR-Printer" -DriverName "Microsoft IPP Class Driver" -PortName "IP_192.168.10.50"</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> clientii tintiti primesc imprimanta si pot tipari conform drepturilor.</p>
-          <p class="verify en"><strong>Validation:</strong> targeted clients receive the printer and print according to permissions.</p>
-        </article>
-
-        <article class="lesson card" data-search="06 serverbeheer remote desktop mmc task manager event viewer">
-          <h3>06 - Serverbeheer / Server Management</h3>
-          <label><input type="checkbox" data-progress="ws06" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> administrare remote (RDP), MMC personalizat, monitorizare procese/services, Event Viewer.</p>
-          <p class="en"><strong>Meaning:</strong> remote administration (RDP), custom MMC, process/service monitoring, Event Viewer.</p>
-          <p class="ro"><strong>Pasi:</strong> activeaza RDP securizat, creeaza console administrative, monitorizeaza loguri critice.</p>
-          <p class="en"><strong>Steps:</strong> enable secure RDP, build admin consoles, monitor critical logs.</p>
-          <pre><code>Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
-Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-Get-Service | Where-Object {$_.Status -eq 'Running'}
-Get-WinEvent -LogName System -MaxEvents 20</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> accesul remote functioneaza, logurile ofera evenimentele de operare relevante.</p>
-          <p class="verify en"><strong>Validation:</strong> remote access works and logs expose relevant operational events.</p>
-        </article>
-
-        <article class="lesson card" data-search="07 disk management partitions basic dynamic raid diskpart">
-          <h3>07 - Disk Management</h3>
-          <label><input type="checkbox" data-progress="ws07" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> initialize disk, partitii, basic vs dynamic, volumes, RAID, DiskPart.</p>
-          <p class="en"><strong>Meaning:</strong> disk initialization, partitions, basic vs dynamic disks, volumes, RAID, DiskPart.</p>
-          <p class="ro"><strong>Pasi:</strong> initializeaza discuri, creeaza volume, valideaza litere/mount points si starea storage.</p>
-          <p class="en"><strong>Steps:</strong> initialize disks, create volumes, validate drive letters/mount points and storage health.</p>
-          <pre><code>Get-Disk
-Initialize-Disk -Number 1 -PartitionStyle GPT
-New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter F
-Format-Volume -DriveLetter F -FileSystem NTFS -NewFileSystemLabel "DATA"
-Get-Volume</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> volumele sunt online, formatate corect si vizibile in sistem.</p>
-          <p class="verify en"><strong>Validation:</strong> volumes are online, correctly formatted, and visible in the system.</p>
-        </article>
-
-        <article class="lesson card" data-search="virtualbox windows server router lab opstelling network adapters ras">
-          <h3>Virtualbox Windows Server Router Lab</h3>
-          <label><input type="checkbox" data-progress="wsvb" /> Finalizat</label>
-          <p class="ro"><strong>Ce inseamna:</strong> laborator adaptat cu 2 NIC (internet + LAN intern), IP plan si RAS de baza.</p>
-          <p class="en"><strong>Meaning:</strong> adapted lab with 2 NICs (internet + internal LAN), IP plan, and basic RAS setup.</p>
-          <p class="ro"><strong>Pasi:</strong> seteaza Bridged + Internal Network, atribuie IP-uri, testeaza rutarea in lab.</p>
-          <p class="en"><strong>Steps:</strong> configure Bridged + Internal Network, assign IPs, test routing in lab.</p>
-          <pre><code>Get-NetIPConfiguration
-New-NetIPAddress -InterfaceAlias "Ethernet 2" -IPAddress 10.10.10.1 -PrefixLength 24
-Install-WindowsFeature RemoteAccess,Routing -IncludeManagementTools
-Test-NetConnection 8.8.8.8</code></pre>
-          <p class="verify ro"><strong>Verificare:</strong> clientii din LAN intern au conectivitate conform designului de laborator.</p>
-          <p class="verify en"><strong>Validation:</strong> internal LAN clients have connectivity according to lab design.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="win11">
-      <div class="section-head">
-        <h2>Windows 11 Syllabus V24H2 (Capitole 1-18)</h2>
-      </div>
-      <div class="compact-grid">
-        <article class="mini card" data-search="windows 11 introductie windows as a service editie hardware">
-          <h3>1. Introductie</h3>
-          <p class="ro">WaaS, editii, cerinte hardware, compatibilitate.</p><p class="en">WaaS, editions, hardware requirements, compatibility.</p>
-          <pre><code>Get-ComputerInfo | Select WindowsVersion,OsName
-Confirm-SecureBootUEFI</code></pre>
-        </article>
-        <article class="mini card" data-search="instalare licente activare updates">
-          <h3>2. Instalare</h3>
-          <p class="ro">Install media, deployment, activare, update strategy.</p><p class="en">Install media, deployment, activation, update strategy.</p>
-          <pre><code>slmgr /xpr
-Get-WindowsUpdateLog</code></pre>
-        </article>
-        <article class="mini card" data-search="accounts locale microsoft domain entra id">
-          <h3>3. Accounts</h3>
-          <p class="ro">Identitate, conturi locale/MS/AD/Entra, UAC.</p><p class="en">Identity, local/MS/AD/Entra accounts, UAC.</p>
-          <pre><code>Get-LocalUser
-whoami /groups</code></pre>
-        </article>
-        <article class="mini card" data-search="werkomgeving desktop start taskbar">
-          <h3>4. Werkomgeving</h3>
-          <p class="ro">Desktop, start menu, taskbar, UX productivity.</p><p class="en">Desktop, start menu, taskbar, UX productivity.</p>
-          <pre><code>Get-StartApps</code></pre>
-        </article>
-        <article class="mini card" data-search="edge browser">
-          <h3>5. Browser</h3>
-          <p class="ro">Edge management, setari de securitate.</p><p class="en">Edge management and security settings.</p>
-          <pre><code>Get-AppxPackage *MicrosoftEdge*</code></pre>
-        </article>
-        <article class="mini card" data-search="bestandsbeheer file explorer onedrive search">
-          <h3>6. Bestandsbeheer</h3>
-          <p class="ro">File Explorer, OneDrive, organizare si cautare.</p><p class="en">File Explorer, OneDrive, organization and search.</p>
-          <pre><code>Get-ChildItem $env:USERPROFILE -Depth 1</code></pre>
-        </article>
-        <article class="mini card" data-search="bestandssysteem ntfs encryptie owner permissions">
-          <h3>7. Bestandssysteem</h3>
-          <p class="ro">NTFS, compresie, encryptie, ownership, ACL.</p><p class="en">NTFS, compression, encryption, ownership, ACL.</p>
-          <pre><code>icacls C:\Temp
-cipher /c C:\Temp</code></pre>
-        </article>
-        <article class="mini card" data-search="opslag disk management diskpart powershell volumes">
-          <h3>8. Opslagruimten</h3>
-          <p class="ro">Disk Management, DiskPart, PowerShell storage.</p><p class="en">Disk Management, DiskPart, PowerShell storage.</p>
-          <pre><code>Get-Disk
-Get-Volume</code></pre>
-        </article>
-        <article class="mini card" data-search="netwerk tcp ip hostnamen sharing domain workgroup">
-          <h3>9. Netwerkomgeving</h3>
-          <p class="ro">TCP/IP, host names, sharing, domain/workgroup.</p><p class="en">TCP/IP, host names, sharing, domain/workgroup.</p>
-          <pre><code>ipconfig /all
-Test-NetConnection SRV-DC01</code></pre>
-        </article>
-        <article class="mini card" data-search="afdrukken printers printserver">
-          <h3>10. Afdrukken</h3>
-          <p class="ro">Instalare printere, management local/shared.</p><p class="en">Printer installation and local/shared management.</p>
-          <pre><code>Get-Printer
-Get-PrintJob</code></pre>
-        </article>
-        <article class="mini card" data-search="software install uninstall apps windows features">
-          <h3>11. Software</h3>
-          <p class="ro">Install/uninstall, compatibilitate, features.</p><p class="en">Install/uninstall, compatibility, features.</p>
-          <pre><code>Get-WindowsOptionalFeature -Online</code></pre>
-        </article>
-        <article class="mini card" data-search="hardware drivers plug and play devices">
-          <h3>12. Hardware</h3>
-          <p class="ro">Drivers, signing, device management.</p><p class="en">Drivers, signing, device management.</p>
-          <pre><code>Get-PnpDevice | Where-Object Status -ne 'OK'</code></pre>
-        </article>
-        <article class="mini card" data-search="security malware defender firewall smartscreen">
-          <h3>13. Elementaire beveiliging</h3>
-          <p class="ro">Windows Security, Defender, Firewall, SmartScreen.</p><p class="en">Windows Security, Defender, Firewall, SmartScreen.</p>
-          <pre><code>Get-MpComputerStatus
-Get-NetFirewallProfile</code></pre>
-        </article>
-        <article class="mini card" data-search="services processen task scheduler">
-          <h3>14. Services si procese</h3>
-          <p class="ro">Services, procese, task scheduling.</p><p class="en">Services, processes, task scheduling.</p>
-          <pre><code>Get-Service
-Get-ScheduledTask | Select TaskName,State -First 20</code></pre>
-        </article>
-        <article class="mini card" data-search="settings control panel policies registry">
-          <h3>15. Configurare avansata</h3>
-          <p class="ro">Settings, Control Panel, policies, registry.</p><p class="en">Settings, Control Panel, policies, registry.</p>
-          <pre><code>Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion</code></pre>
-        </article>
-        <article class="mini card" data-search="troubleshooting task manager resource monitor performance event viewer">
-          <h3>16. Troubleshooting</h3>
-          <p class="ro">Task Manager, Resource Monitor, Event Viewer.</p><p class="en">Task Manager, Resource Monitor, Event Viewer.</p>
-          <pre><code>Get-EventLog -LogName System -Newest 20</code></pre>
-        </article>
-        <article class="mini card" data-search="support remote assistance documentation">
-          <h3>17. User support</h3>
-          <p class="ro">Remote support si documentare operationala.</p><p class="en">Remote support and operational documentation.</p>
-          <pre><code>Get-Help Get-Process -Online</code></pre>
-        </article>
-        <article class="mini card" data-search="recovery backup restore reset bcd file history">
-          <h3>18. Recovery</h3>
-          <p class="ro">Backup, restore, recovery, reset, BCD troubleshooting.</p><p class="en">Backup, restore, recovery, reset, BCD troubleshooting.</p>
-          <pre><code>reagentc /info
-wbadmin get versions</code></pre>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="azure">
-      <div class="section-head">
-        <h2>Azure Introductie 2024-12 (Capitole 1-10)</h2>
-      </div>
-      <div class="compact-grid">
-        <article class="mini card" data-search="azure inleiding cloud eigenschappen iaas paas saas public private hybrid">
-          <h3>1. Inleiding Cloud</h3>
-          <p class="ro">Modele cloud, caracteristici esentiale, motivatia business.</p><p class="en">Cloud models, essential characteristics, business motivation.</p>
-          <pre><code>az account show</code></pre>
-        </article>
-        <article class="mini card" data-search="toegang subscriptions portal cloud shell students">
-          <h3>2. Toegang tot Azure</h3>
-          <p class="ro">Subscriptions, portal, Cloud Shell, Azure for Students.</p><p class="en">Subscriptions, portal, Cloud Shell, Azure for Students.</p>
-          <pre><code>Connect-AzAccount
-Get-AzSubscription</code></pre>
-        </article>
-        <article class="mini card" data-search="virtuele machines resource group region vm connect basisconfig">
-          <h3>3. Virtuele machines</h3>
-          <p class="ro">Resource groups, regiuni, creare VM, conectare si ops de baza.</p><p class="en">Resource groups, regions, VM creation, connection, basic ops.</p>
-          <pre><code>New-AzResourceGroup -Name rg-lab -Location westeurope
-New-AzVM -ResourceGroupName rg-lab -Name vm-lab -Location westeurope</code></pre>
-        </article>
-        <article class="mini card" data-search="storage account files azure storage explorer">
-          <h3>4. Storage</h3>
-          <p class="ro">Tipuri de storage, conturi, upload fisiere, explorer.</p><p class="en">Storage types, accounts, file upload, explorer.</p>
-          <pre><code>New-AzStorageAccount -ResourceGroupName rg-lab -Name stlabdemo001 -SkuName Standard_LRS -Location westeurope</code></pre>
-        </article>
-        <article class="mini card" data-search="netwerking vnet subnet nsg public private ip">
-          <h3>5. Netwerking</h3>
-          <p class="ro">VNet, subnet, NSG, private/public IP si reguli.</p><p class="en">VNet, subnet, NSG, private/public IP and rules.</p>
-          <pre><code>Get-AzVirtualNetwork
-Get-AzNetworkSecurityGroup</code></pre>
-        </article>
-        <article class="mini card" data-search="webapp app service plan custom domains">
-          <h3>6. Webapplicatie</h3>
-          <p class="ro">App Service Plan, deploy webapp, custom domains.</p><p class="en">App Service Plan, web app deployment, custom domains.</p>
-          <pre><code>New-AzAppServicePlan -Name asp-lab -Location westeurope -ResourceGroupName rg-lab -Tier Free
-New-AzWebApp -Name web-lab-demo-001 -Location westeurope -AppServicePlan asp-lab -ResourceGroupName rg-lab</code></pre>
-        </article>
-        <article class="mini card" data-search="database sql azure">
-          <h3>7. Database</h3>
-          <p class="ro">Creare SQL Database si integrare aplicatii.</p><p class="en">SQL Database creation and application integration.</p>
-          <pre><code>Get-AzSqlServer
-Get-AzSqlDatabase</code></pre>
-        </article>
-        <article class="mini card" data-search="kostenbeheer cost management pricing calculator">
-          <h3>8. Kostenbeheer / Cost Management</h3>
-          <p class="ro">Monitorizare costuri, forecasting, control buget.</p><p class="en">Cost monitoring, forecasting, budget control.</p>
-          <pre><code>Get-AzConsumptionUsageDetail -StartDate (Get-Date).AddDays(-30) -EndDate (Get-Date)</code></pre>
-        </article>
-        <article class="mini card" data-search="voor wie meer wil advanced">
-          <h3>9. Voor wie meer wil</h3>
-          <p class="ro">Extensii de studiu pentru aprofundare.</p><p class="en">Extended study topics for deeper practice.</p>
-          <pre><code>Get-AzResource | Select Name,ResourceType -First 20</code></pre>
-        </article>
-        <article class="mini card" data-search="multifactor authentication mfa entra id">
-          <h3>10. Multifactor Authentication</h3>
-          <p class="ro">MFA si protectia identitatii in Entra ID.</p><p class="en">MFA and identity protection in Entra ID.</p>
-          <pre><code>Connect-MgGraph -Scopes Policy.Read.All
-Get-MgPolicyAuthenticationMethodPolicy</code></pre>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="labs">
-      <div class="section-head">
-        <h2 class="ro">Mini Laburi Corelate cu Cursul</h2>
-        <h2 class="en">Mini Labs Mapped to the Course</h2>
-      </div>
-      <div class="lesson-grid">
-        <article class="lesson card" data-search="lab 1 ad ds dns dhcp">
-          <h3>Lab 1 - Domain Foundation</h3>
-          <label><input type="checkbox" data-progress="lab1" /> Finalizat</label>
-          <ol class="ro">
-            <li>Instaleaza AD DS + DNS + DHCP pe server.</li>
-            <li>Creeaza domeniul si scope-ul DHCP.</li>
-            <li>Join client Windows 11 in domeniu.</li>
-          </ol>
-          <ol class="en">
-            <li>Install AD DS + DNS + DHCP on server.</li>
-            <li>Create domain and DHCP scope.</li>
-            <li>Join a Windows 11 client to the domain.</li>
-          </ol>
-        </article>
-        <article class="lesson card" data-search="lab 2 file server gpo ntfs">
-          <h3>Lab 2 - Secure File Service</h3>
-          <label><input type="checkbox" data-progress="lab2" /> Finalizat</label>
-          <ol class="ro">
-            <li>Creeaza share ascuns + ACL AGDLP.</li>
-            <li>Aplica GPO pentru mapare unitate.</li>
-            <li>Testeaza acces per rol.</li>
-          </ol>
-          <ol class="en">
-            <li>Create hidden share + AGDLP ACL.</li>
-            <li>Apply GPO for drive mapping.</li>
-            <li>Test role-based access.</li>
-          </ol>
-        </article>
-        <article class="lesson card" data-search="lab 3 azure vm nsg cost">
-          <h3>Lab 3 - Azure VM + Cost</h3>
-          <label><input type="checkbox" data-progress="lab3" /> Finalizat</label>
-          <ol class="ro">
-            <li>Creeaza Resource Group, VM, VNet, NSG.</li>
-            <li>Configureaza acces RDP limitat.</li>
-            <li>Verifica cost usage pe 7 zile.</li>
-          </ol>
-          <ol class="en">
-            <li>Create Resource Group, VM, VNet, NSG.</li>
-            <li>Configure restricted RDP access.</li>
-            <li>Check 7-day cost usage.</li>
-          </ol>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="materials">
-      <div class="section-head">
-        <h2>Materiale Sursa (folosite la structura)</h2>
-      </div>
-      <div class="two-col card">
-        <div>
-          <h3>Windows Server 2022</h3>
-          <ul>
-            <li><a href="Windows%20Server%202022/00-Inleiding.pdf" target="_blank">00-Inleiding</a></li>
-            <li><a href="Windows%20Server%202022/01-OpzettenDomein.pdf" target="_blank">01-OpzettenDomein</a></li>
-            <li><a href="Windows%20Server%202022/02-Accounts.pdf" target="_blank">02-Accounts</a></li>
-            <li><a href="Windows%20Server%202022/03-File%20Server.pdf" target="_blank">03-File Server</a></li>
-            <li><a href="Windows%20Server%202022/04-Gebruikersomgeving.pdf" target="_blank">04-Gebruikersomgeving</a></li>
-            <li><a href="Windows%20Server%202022/05-Printerbeheer.pdf" target="_blank">05-Printerbeheer</a></li>
-            <li><a href="Windows%20Server%202022/06-Serverbeheer.pdf" target="_blank">06-Serverbeheer</a></li>
-            <li><a href="Windows%20Server%202022/07-Disk%20Management.pdf" target="_blank">07-Disk Management</a></li>
-            <li><a href="Windows%20Server%202022/Virtualbox%20Windows%20Server%20Router.pdf" target="_blank">Virtualbox Windows Server Router</a></li>
-          </ul>
+      <section id="server" class="section">
+        <div class="section-head">
+          <h2>Windows Server 2022 - Curs complet pe module</h2>
+          <p class="ro">Bazat direct pe fisierele 00-07 + Virtualbox Router din folderul tau.</p>
+          <p class="en">Directly mapped to your 00-07 files + Virtualbox Router guide.</p>
         </div>
-        <div>
-          <h3>Windows 11 + Azure</h3>
-          <ul>
-            <li><a href="windows%2011/Windows11SyllabusV24H2.pdf" target="_blank">Windows11SyllabusV24H2</a></li>
-            <li><a href="Azure%20-%20Introductie%20Versie%202024-12.pdf" target="_blank">Azure Introductie 2024-12</a></li>
-          </ul>
-          <h3>Video oficial</h3>
-          <ul>
-            <li><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">Microsoft Learn</a></li>
-            <li><a href="https://www.youtube.com/@MicrosoftMechanics" target="_blank" rel="noopener noreferrer">Microsoft Mechanics</a></li>
-          </ul>
+        <div id="serverModules" class="module-grid"></div>
+      </section>
+
+      <section id="win11" class="section">
+        <div class="section-head">
+          <h2>Windows 11 Syllabus V24H2 - Capitole 1-18</h2>
+          <p class="ro">Fiecare capitol are ce inseamna, flux de lucru, verificare si comenzi.</p>
+          <p class="en">Each chapter contains meaning, workflow, validation and commands.</p>
         </div>
-      </div>
-    </section>
-  </main>
+        <div id="win11Modules" class="module-grid"></div>
+      </section>
+
+      <section id="azure" class="section">
+        <div class="section-head">
+          <h2>Azure Introductie 2024-12 - Capitole 1-10</h2>
+        </div>
+        <div id="azureModules" class="module-grid"></div>
+      </section>
+
+      <section id="m365" class="section">
+        <div class="section-head">
+          <h2>Microsoft 365 - Parcurs complet de administrare</h2>
+        </div>
+        <div id="m365Modules" class="module-grid"></div>
+      </section>
+
+      <section id="powershell" class="section">
+        <div class="section-head">
+          <h2>PowerShell - De la baza la automatizare</h2>
+        </div>
+        <div id="powershellModules" class="module-grid"></div>
+      </section>
+
+      <section id="cmd" class="section">
+        <div class="section-head">
+          <h2>Comenzi utile in CMD</h2>
+        </div>
+        <div id="cmdModules" class="module-grid"></div>
+      </section>
+
+      <section id="troubleshooting" class="section">
+        <div class="section-head">
+          <h2>Troubleshooting Playbooks</h2>
+        </div>
+        <div id="troubleshootingModules" class="module-grid"></div>
+      </section>
+
+      <section id="materials" class="section card materials">
+        <h2>Materiale sursa integrate</h2>
+        <div class="materials-grid">
+          <div>
+            <h3>Windows Server 2022</h3>
+            <ul>
+              <li><a target="_blank" href="Windows%20Server%202022/00-Inleiding.pdf">00-Inleiding</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/01-OpzettenDomein.pdf">01-OpzettenDomein</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/02-Accounts.pdf">02-Accounts</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/03-File%20Server.pdf">03-File Server</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/04-Gebruikersomgeving.pdf">04-Gebruikersomgeving</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/05-Printerbeheer.pdf">05-Printerbeheer</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/06-Serverbeheer.pdf">06-Serverbeheer</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/07-Disk%20Management.pdf">07-Disk Management</a></li>
+              <li><a target="_blank" href="Windows%20Server%202022/Virtualbox%20Windows%20Server%20Router.pdf">Virtualbox Windows Server Router</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Windows 11 + Azure</h3>
+            <ul>
+              <li><a target="_blank" href="windows%2011/Windows11SyllabusV24H2.pdf">Windows11SyllabusV24H2</a></li>
+              <li><a target="_blank" href="Azure%20-%20Introductie%20Versie%202024-12.pdf">Azure Introductie 2024-12</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>

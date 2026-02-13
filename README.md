@@ -1,24 +1,25 @@
-# Windows Enterprise Academy (RO/EN)
+# Enterprise IT Learning Portal (RO/EN)
 
-Site static pentru GitHub Pages, corectat si aliniat pe materialele tale:
-- `Windows Server 2022` (00-07 + Virtualbox Router)
-- `windows 11/Windows11SyllabusV24H2.pdf` (cap. 1-18)
-- `Azure - Introductie Versie 2024-12.pdf` (cap. 1-10)
+Portalul este reconstruit pe structura ceruta:
+1. Windows Server 2022 (00-07 + Virtualbox Router)
+2. Windows 11 (cap. 1-18)
+3. Azure (cap. 1-10)
+4. Microsoft 365
+5. PowerShell
+6. CMD utile
+7. Troubleshooting
 
-## Ce contine
-
-- Structura pe lectii conform syllabus
-- Pentru lectiile principale: teorie, pasi de lucru, verificare, comenzi PowerShell
-- Bilingv RO/EN (toggle limba)
-- Cautare rapida in lectii
-- Progres salvat local (checkbox-uri)
+Fiecare modul are:
+- Teorie
+- Pasi de lucru
+- Verificare
+- Comenzi utile
 
 ## Publicare GitHub Pages
 
-1. `Settings` -> `Pages`
-2. `Deploy from a branch`
-3. Branch `main`, folder `/ (root)`
-4. `Save`
+- `Settings` -> `Pages`
+- `Deploy from a branch`
+- Branch `main`, folder `/ (root)`
 
-Site-ul va fi disponibil la:
+URL live:
 `https://silviu3369.github.io/Windows-Server-2022/`

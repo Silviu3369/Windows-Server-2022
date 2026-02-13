@@ -1,12 +1,11 @@
 ﻿:root {
-  --bg: #071224;
-  --panel: #0e1f38;
-  --panel-soft: #132845;
-  --line: #254366;
-  --text: #e8f1ff;
-  --muted: #a9bfdc;
-  --accent: #39d1a1;
-  --accent-2: #ffbe55;
+  --bg: #081325;
+  --bg-soft: #0f223f;
+  --card: #102844;
+  --line: #22496c;
+  --text: #e9f2ff;
+  --muted: #a8c1df;
+  --accent: #3bd5a5;
 }
 
 * { box-sizing: border-box; }
@@ -14,167 +13,194 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "IBM Plex Sans", sans-serif;
-  color: var(--text);
   background:
-    radial-gradient(circle at 15% 0%, #1d3f69 0, #0a1630 36%, var(--bg) 100%);
+    radial-gradient(circle at 0% 0%, #1e4572 0, #0a1730 35%, var(--bg) 100%);
+  color: var(--text);
+  font-family: "Manrope", sans-serif;
 }
 
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 50;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   padding: 0.9rem 1rem;
-  background: rgba(8, 17, 33, 0.92);
+  background: rgba(6, 15, 29, 0.92);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 
 .brand {
   display: grid;
-  gap: 0.1rem;
-  font-family: "Sora", sans-serif;
+  gap: 0.12rem;
 }
 
-.brand strong { font-size: 0.95rem; }
-.brand span { color: var(--muted); font-size: 0.76rem; }
+.brand strong { font-size: 0.95rem; font-weight: 800; }
+.brand span { color: var(--muted); font-size: 0.78rem; }
 
-.top-actions { display: flex; gap: 0.55rem; align-items: center; }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
 
-#lessonSearch {
-  width: min(42vw, 340px);
-  padding: 0.55rem 0.7rem;
-  border-radius: 10px;
+#globalSearch {
+  width: min(44vw, 360px);
   border: 1px solid var(--line);
-  background: #0f223f;
+  border-radius: 10px;
+  background: var(--bg-soft);
   color: var(--text);
+  padding: 0.55rem 0.7rem;
 }
 
 .lang-btn {
   border: 0;
   border-radius: 10px;
-  padding: 0.55rem 0.78rem;
-  font-weight: 700;
+  background: linear-gradient(140deg, var(--accent), #7dfad4);
+  color: #043726;
+  font-weight: 800;
+  padding: 0.55rem 0.75rem;
   cursor: pointer;
-  color: #033726;
-  background: linear-gradient(140deg, var(--accent), #74ffd6);
 }
 
-.wrap {
-  max-width: 1300px;
+.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 1rem;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 1rem;
+}
+
+.sidebar {
+  position: sticky;
+  top: 76px;
+  height: fit-content;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(9, 20, 37, 0.85);
+  padding: 0.65rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.45rem 0.55rem;
+  font-size: 0.9rem;
+}
+
+.sidebar a:hover {
+  background: rgba(59, 213, 165, 0.15);
+}
+
+.content {
   display: grid;
   gap: 1rem;
 }
 
-.section { display: grid; gap: 0.7rem; }
-
-.section-head h2,
-h1,
-h2,
-h3 {
-  margin: 0;
-  font-family: "Sora", sans-serif;
+.section {
+  display: grid;
+  gap: 0.7rem;
 }
+
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.3vw, 1.4rem);
+}
+
+.section-head p { margin: 0.2rem 0 0; color: var(--muted); }
 
 .card {
   border: 1px solid var(--line);
-  background: linear-gradient(160deg, rgba(18, 40, 69, 0.95), rgba(13, 28, 50, 0.95));
   border-radius: 14px;
-  padding: 0.9rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(160deg, #112a48 0%, #0f223c 90%);
+  padding: 0.95rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
 }
 
-.hero p,
-.lesson p,
-.mini p,
-li,
-label {
-  color: var(--muted);
-}
+.hero h1 { margin: 0 0 0.45rem; font-size: clamp(1.3rem, 3vw, 1.9rem); }
+.hero p { margin: 0; color: var(--muted); }
 
-.lesson-grid {
+.module-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 0.75rem;
 }
 
-.compact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.65rem;
+.module h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
 }
 
-.lesson h3,
-.mini h3 { margin-bottom: 0.5rem; }
-
-.pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.6rem;
+.module p,
+.module li,
+.materials li {
+  color: var(--muted);
+  margin: 0.25rem 0;
 }
 
-.pill {
+.source {
   display: inline-block;
-  border: 1px solid #35638e;
+  border: 1px solid #2c5b84;
   border-radius: 999px;
-  font-size: 0.8rem;
-  color: #c8e4ff;
-  padding: 0.25rem 0.55rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+  color: #c4ddff;
+}
+
+.module ol,
+.module ul {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1rem;
 }
 
 pre {
-  margin: 0.55rem 0;
-  border: 1px solid #2f5177;
+  margin: 0.35rem 0 0;
+  border: 1px solid #315675;
   border-radius: 10px;
-  background: #071326;
-  color: #cde7ff;
-  padding: 0.7rem;
+  background: #091526;
+  padding: 0.65rem;
   overflow-x: auto;
-  font-size: 0.82rem;
 }
 
-.verify {
-  margin: 0;
-  border-top: 1px dashed #335778;
-  padding-top: 0.45rem;
+code {
+  color: #cfe9ff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
 }
 
-.two-col {
+.materials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1rem;
 }
 
-a { color: #90d5ff; }
-a:hover { color: #cbecff; }
+a { color: #90d7ff; }
+a:hover { color: #d1eeff; }
 
 .hidden { display: none; }
-
 .en { display: none; }
 body.lang-en .en { display: block; }
 body.lang-en .ro { display: none; }
 body:not(.lang-en) .ro { display: block; }
 body:not(.lang-en) .en { display: none; }
 
-body.lang-en td.en,
-body.lang-en li.en,
-body.lang-en p.en,
-body.lang-en span.en { display: block; }
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
 
-body:not(.lang-en) td.ro,
-body:not(.lang-en) li.ro,
-body:not(.lang-en) p.ro,
-body:not(.lang-en) span.ro { display: block; }
-
-@media (max-width: 740px) {
+@media (max-width: 660px) {
   .topbar { flex-wrap: wrap; }
-  #lessonSearch { width: 100%; }
-  .top-actions { width: 100%; }
+  .actions { width: 100%; }
+  #globalSearch { width: 100%; }
 }
