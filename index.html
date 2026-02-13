@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="brand">
       <strong>IT Academy Pro</strong>
@@ -18,6 +18,7 @@
       <span class="en">Full structured curriculum for practical learning</span>
     </div>
     <div class="toolbar">
+      <a class="home-btn" href="#top">Home</a>
       <input id="searchInput" type="search" placeholder="Cauta capitol, termen, comanda..." />
       <button id="langToggle" class="lang-toggle">EN</button>
     </div>
@@ -26,6 +27,7 @@
   <div class="shell">
     <aside class="sidebar">
       <p class="menu-title">Roadmap</p>
+      <a href="#top">Home</a>
       <a href="#course-server">1. Windows Server 2022</a>
       <a href="#course-win11">2. Windows 11</a>
       <a href="#course-azure">3. Azure</a>
@@ -33,6 +35,8 @@
       <a href="#course-powershell">5. PowerShell</a>
       <a href="#course-cmd">6. CMD Util</a>
       <a href="#course-troubleshooting">7. Troubleshooting</a>
+      <a href="#video-resources">Video</a>
+      <a href="#image-gallery">Imagini</a>
       <a href="#materials">Materiale tale</a>
       <div class="progress-box">
         <p class="menu-title">Progress</p>
@@ -94,6 +98,44 @@
       <section id="course-troubleshooting" class="course-section">
         <div class="course-head"><h2>Troubleshooting Track</h2></div>
         <div id="troubleChapters" class="chapter-grid"></div>
+      </section>
+
+      <section id="video-resources" class="course-section card">
+        <div class="course-head">
+          <h2 class="ro">Surse video recomandate</h2>
+          <h2 class="en">Recommended video sources</h2>
+        </div>
+        <div class="materials-grid">
+          <div>
+            <h3>Windows Server / Azure</h3>
+            <ul>
+              <li><a href="https://www.youtube.com/@MicrosoftMechanics" target="_blank" rel="noopener noreferrer">Microsoft Mechanics</a></li>
+              <li><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">Microsoft Learn (official training)</a></li>
+              <li><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener noreferrer">Windows Server Documentation</a></li>
+              <li><a href="https://learn.microsoft.com/azure/" target="_blank" rel="noopener noreferrer">Azure Documentation</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Microsoft 365 / PowerShell</h3>
+            <ul>
+              <li><a href="https://learn.microsoft.com/microsoft-365/" target="_blank" rel="noopener noreferrer">Microsoft 365 Docs</a></li>
+              <li><a href="https://learn.microsoft.com/powershell/" target="_blank" rel="noopener noreferrer">PowerShell Docs</a></li>
+              <li><a href="https://learn.microsoft.com/training/browse/?products=m365" target="_blank" rel="noopener noreferrer">M365 Learning Paths</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="image-gallery" class="course-section card">
+        <div class="course-head">
+          <h2 class="ro">Imagini orientative pentru invatare</h2>
+          <h2 class="en">Reference learning images</h2>
+        </div>
+        <div class="image-grid">
+          <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80" alt="Server rack and datacenter" />
+          <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80" alt="Laptop and cloud architecture concept" />
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Network and infrastructure lights" />
+        </div>
       </section>
 
       <section id="materials" class="course-section card">

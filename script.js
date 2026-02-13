@@ -1,6 +1,10 @@
 const buildCard = (item) => {
-  const steps = item.steps.map((s) => `<li>${s}</li>`).join("");
-  const checks = item.verify.map((v) => `<li>${v}</li>`).join("");
+  const summaryEn = item.summaryEn || item.summary;
+  const labEn = item.labEn || item.lab;
+  const stepsRo = item.steps.map((s) => `<li>${s}</li>`).join("");
+  const stepsEn = (item.stepsEn || item.steps).map((s) => `<li>${s}</li>`).join("");
+  const checksRo = item.verify.map((v) => `<li>${v}</li>`).join("");
+  const checksEn = (item.verifyEn || item.verify).map((v) => `<li>${v}</li>`).join("");
   const cmds = item.commands.join("\n");
   return `
     <article class="card chapter searchable" data-search="${(item.title + " " + item.summary + " " + item.tags).toLowerCase()}">
@@ -8,16 +12,23 @@ const buildCard = (item) => {
         <h3>${item.title}</h3>
         <label class="done"><input type="checkbox" data-progress="${item.id}"/> Done</label>
       </div>
-      <p><strong>Teorie:</strong> ${item.summary}</p>
+      <p class="ro"><strong>Teorie:</strong> ${item.summary}</p>
+      <p class="en"><strong>Theory:</strong> ${summaryEn}</p>
       <details>
-        <summary>Plan de lucru + validare + mini-lab</summary>
-        <p><strong>Pasi:</strong></p>
-        <ol>${steps}</ol>
-        <p><strong>Verificare:</strong></p>
-        <ul>${checks}</ul>
-        <p><strong>Mini-lab:</strong> ${item.lab}</p>
+        <summary><span class="ro">Plan de lucru + validare + mini-lab</span><span class="en">Workflow + validation + mini-lab</span></summary>
+        <p class="ro"><strong>Pasi:</strong></p>
+        <p class="en"><strong>Steps:</strong></p>
+        <ol class="ro">${stepsRo}</ol>
+        <ol class="en">${stepsEn}</ol>
+        <p class="ro"><strong>Verificare:</strong></p>
+        <p class="en"><strong>Validation:</strong></p>
+        <ul class="ro">${checksRo}</ul>
+        <ul class="en">${checksEn}</ul>
+        <p class="ro"><strong>Mini-lab:</strong> ${item.lab}</p>
+        <p class="en"><strong>Mini-lab:</strong> ${labEn}</p>
       </details>
-      <p><strong>Comenzi utile:</strong></p>
+      <p class="ro"><strong>Comenzi utile:</strong></p>
+      <p class="en"><strong>Useful commands:</strong></p>
       <pre><code>${cmds}</code></pre>
     </article>
   `;

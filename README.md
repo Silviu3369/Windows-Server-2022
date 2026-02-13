@@ -21,5 +21,8 @@ Functii:
 - Toggle RO/EN
 - Progress bar cu stocare locala
 - Design modern, responsive
+- Buton Home + meniu lateral pe sectiuni
+- Surse video oficiale
+- Galerie imagini externe pentru prezentare
 
 Publicare: GitHub Pages (`main` + `/root`)
