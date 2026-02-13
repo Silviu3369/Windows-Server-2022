@@ -3,183 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IT Learning Hub - Windows, M365, Azure</title>
-  <meta name="description" content="Platforma de invatare bilingva (RO/EN) pentru Windows Server 2022, Windows 11, Microsoft 365 si Azure, cu laburi si comenzi PowerShell." />
+  <title>Windows Enterprise Academy | RO/EN</title>
+  <meta name="description" content="Manual modern, bilingv (romana/engleza) pentru Windows Server 2022, Windows 11, Microsoft 365 si Azure, cu laboratoare si PowerShell." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">IT Learning Hub</div>
-    <nav>
-      <a href="#modules" data-i18n="nav_modules">Module</a>
-      <a href="#labs" data-i18n="nav_labs">Mini Laburi</a>
-      <a href="#resources" data-i18n="nav_resources">Resurse</a>
-      <a href="#materials" data-i18n="nav_materials">Materiale</a>
-    </nav>
-    <button id="langToggle" class="lang-btn">EN</button>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <strong>Windows Enterprise Academy</strong>
+      <span>RO/EN Learning Portal</span>
+    </div>
+    <div class="top-actions">
+      <label class="search-wrap">
+        <input id="lessonSearch" type="search" placeholder="Cauta lectie / Search lesson" />
+      </label>
+      <button id="langToggle" class="lang-btn">EN</button>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-text">
-        <p class="badge" data-i18n="hero_badge">Program de invatare practic</p>
-        <h1 data-i18n="hero_title">Windows Server 2022, Windows 11, Microsoft 365 si Azure</h1>
-        <p data-i18n="hero_subtitle">Invata in romana si engleza, pas cu pas, cu comenzi PowerShell, mini-laburi si materiale video.</p>
-        <a class="cta" href="#modules" data-i18n="hero_cta">Incepe cursul</a>
-      </div>
-      <div class="hero-art" aria-hidden="true"></div>
-    </section>
+  <main class="layout">
+    <aside class="sidebar">
+      <a href="#overview" class="toc-link">Overview</a>
+      <a href="#path" class="toc-link">Learning Path</a>
+      <a href="#ws-core" class="toc-link">Windows Server Core</a>
+      <a href="#ad-dns-dhcp" class="toc-link">AD DS / DNS / DHCP</a>
+      <a href="#identity" class="toc-link">Identity & Permissions</a>
+      <a href="#file-print" class="toc-link">File & Print Services</a>
+      <a href="#gpo-security" class="toc-link">GPO & Security</a>
+      <a href="#win11" class="toc-link">Windows 11 Integration</a>
+      <a href="#m365" class="toc-link">Microsoft 365 Admin</a>
+      <a href="#azure" class="toc-link">Azure Operations</a>
+      <a href="#labs" class="toc-link">Mini Labs</a>
+      <a href="#videos" class="toc-link">Video & Media</a>
+      <a href="#materials" class="toc-link">Your Course Files</a>
+    </aside>
 
-    <section class="roadmap" id="modules">
-      <h2 data-i18n="modules_title">Module de curs</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Windows Server 2022</h3>
-          <p data-i18n="server_desc">AD DS, conturi, file server, print server, management si disk administration.</p>
-          <pre><code>Install-WindowsFeature AD-Domain-Services
-Get-ADUser -Filter *
-New-SmbShare -Name Data -Path C:\Data -FullAccess "Domain Admins"</code></pre>
-          <a href="#materials" data-i18n="view_materials">Vezi materialele</a>
-        </article>
+    <section class="content">
+      <article id="overview" class="panel" data-search="overview intro academy enterprise guide">
+        <div class="panel-head">
+          <h1>Windows Server 2022 Enterprise Manual</h1>
+          <p class="sub ro">Platforma completa pentru invatare practica in romana si engleza.</p>
+          <p class="sub en">A complete practical learning platform in Romanian and English.</p>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi"><strong>4</strong><span class="ro">track-uri principale</span><span class="en">main learning tracks</span></div>
+          <div class="kpi"><strong>30+</strong><span class="ro">comenzi PowerShell</span><span class="en">PowerShell commands</span></div>
+          <div class="kpi"><strong>8</strong><span class="ro">mini-laburi ghidate</span><span class="en">guided mini labs</span></div>
+          <div class="kpi"><strong>RO/EN</strong><span class="ro">continut bilingv</span><span class="en">bilingual content</span></div>
+        </div>
+      </article>
 
-        <article class="card">
-          <h3>Windows 11</h3>
-          <p data-i18n="win11_desc">Configurare client, securitate, update-uri, productivitate si troubleshooting.</p>
-          <pre><code>Get-ComputerInfo | Select WindowsProductName, WindowsVersion
-Get-WindowsUpdateLog
-Get-AppxPackage | Sort Name</code></pre>
-          <a href="#materials" data-i18n="view_materials">Vezi materialele</a>
-        </article>
+      <article id="path" class="panel" data-search="learning path roadmap weeks plan">
+        <h2>Learning Path (12 Weeks)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Week</th><th class="ro">Focus</th><th class="en">Focus</th><th>Deliverable</th></tr></thead>
+            <tbody>
+              <tr><td>1-2</td><td class="ro">Instalare, networking, baseline</td><td class="en">Installation, networking, baseline</td><td>Server functional + snapshots</td></tr>
+              <tr><td>3-4</td><td class="ro">AD DS, DNS, DHCP</td><td class="en">AD DS, DNS, DHCP</td><td>Domeniu operational</td></tr>
+              <tr><td>5-6</td><td class="ro">Users, Groups, AGDLP, NTFS</td><td class="en">Users, Groups, AGDLP, NTFS</td><td>Model acces documentat</td></tr>
+              <tr><td>7-8</td><td class="ro">File Server, Print Server, GPO</td><td class="en">File Server, Print Server, GPO</td><td>Politici de companie</td></tr>
+              <tr><td>9-10</td><td class="ro">Integrare Windows 11 + RSAT</td><td class="en">Windows 11 integration + RSAT</td><td>Client joined + management</td></tr>
+              <tr><td>11</td><td class="ro">Microsoft 365 administratie</td><td class="en">Microsoft 365 administration</td><td>Tenant setup de baza</td></tr>
+              <tr><td>12</td><td class="ro">Azure operations + monitorizare</td><td class="en">Azure operations + monitoring</td><td>Lab final complet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
 
-        <article class="card">
-          <h3>Microsoft 365</h3>
-          <p data-i18n="m365_desc">Administrare utilizatori, licente, Exchange Online, Teams si securitate de baza.</p>
-          <pre><code>Connect-MgGraph -Scopes User.ReadWrite.All
-Get-MgUser -Top 10
-Get-MgSubscribedSku</code></pre>
-          <a href="#labs" data-i18n="practice_lab">Practica in lab</a>
-        </article>
+      <article id="ws-core" class="panel" data-search="windows server install virtualbox vm core setup">
+        <h2>Windows Server Core Setup</h2>
+        <ul class="checklist">
+          <li><input type="checkbox" data-progress="ws1" /><span class="ro">VM cu 2 NIC-uri (LAN + NAT)</span><span class="en">VM with 2 NICs (LAN + NAT)</span></li>
+          <li><input type="checkbox" data-progress="ws2" /><span class="ro">Hostname, IP static, timezone, update baseline</span><span class="en">Hostname, static IP, timezone, update baseline</span></li>
+        </ul>
+        <pre><code>Rename-Computer -NewName SRV-DC01 -Restart
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.10.10 -PrefixLength 24 -DefaultGateway 192.168.10.1
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 192.168.10.10
+sconfig</code></pre>
+      </article>
 
-        <article class="card">
-          <h3>Azure</h3>
-          <p data-i18n="azure_desc">Resource groups, VM-uri, storage, networking si monitorizare.</p>
-          <pre><code>Connect-AzAccount
-New-AzResourceGroup -Name rg-lab -Location westeurope
-Get-AzVM</code></pre>
-          <a href="#labs" data-i18n="practice_lab">Practica in lab</a>
-        </article>
-      </div>
-    </section>
+      <article id="ad-dns-dhcp" class="panel" data-search="ad ds dns dhcp domain controller forest">
+        <h2>AD DS, DNS, DHCP</h2>
+        <p class="ro">Configurezi infrastructura enterprise de baza: domeniu, rezolvare nume, lease management.</p>
+        <p class="en">Build the enterprise base infrastructure: domain, name resolution, and lease management.</p>
+        <pre><code>Install-WindowsFeature AD-Domain-Services,DNS,DHCP -IncludeManagementTools
+Install-ADDSForest -DomainName "academy.local" -DomainNetbiosName "ACADEMY"
+Add-DhcpServerInDC -DnsName "SRV-DC01.academy.local" -IPAddress 192.168.10.10
+Add-DhcpServerv4Scope -Name "LAN" -StartRange 192.168.10.100 -EndRange 192.168.10.220 -SubnetMask 255.255.255.0</code></pre>
+      </article>
 
-    <section class="labs" id="labs">
-      <h2 data-i18n="labs_title">Mini laburi ghidate</h2>
-      <div class="grid two">
-        <article class="card">
-          <h3 data-i18n="lab1_title">Lab 1: Active Directory rapid</h3>
-          <ol>
-            <li data-i18n="lab1_step1">Instaleaza AD DS pe Windows Server 2022.</li>
-            <li data-i18n="lab1_step2">Promoveaza serverul ca Domain Controller nou.</li>
-            <li data-i18n="lab1_step3">Creeaza OU, utilizator si grup de test.</li>
-          </ol>
-          <pre><code>Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
-Install-ADDSForest -DomainName "lab.local"
-New-ADOrganizationalUnit -Name "LabUsers" -Path "DC=lab,DC=local"</code></pre>
-        </article>
+      <article id="identity" class="panel" data-search="identity groups permissions agdlp ou users">
+        <h2>Identity, Groups, Permissions (AGDLP)</h2>
+        <pre><code>New-ADOrganizationalUnit -Name "Users" -Path "DC=academy,DC=local"
+New-ADUser -Name "Ana Pop" -GivenName Ana -Surname Pop -SamAccountName apop -Enabled $true -AccountPassword (ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force)
+New-ADGroup -Name "GG-Finance-RW" -GroupScope Global -Path "OU=Users,DC=academy,DC=local"
+Add-ADGroupMember -Identity "GG-Finance-RW" -Members apop</code></pre>
+      </article>
 
-        <article class="card">
-          <h3 data-i18n="lab2_title">Lab 2: Hardening Windows 11</h3>
-          <ol>
-            <li data-i18n="lab2_step1">Activeaza BitLocker pe drive-ul OS.</li>
-            <li data-i18n="lab2_step2">Configureaza Windows Defender Firewall profile.</li>
-            <li data-i18n="lab2_step3">Verifica statusul de update.</li>
-          </ol>
-          <pre><code>Enable-BitLocker -MountPoint "C:" -EncryptionMethod XtsAes256 -UsedSpaceOnly
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
-Get-HotFix | Sort InstalledOn -Descending</code></pre>
-        </article>
+      <article id="file-print" class="panel" data-search="file server print server ntfs smb share quotas fsrm">
+        <h2>File Server & Print Server</h2>
+        <pre><code>Install-WindowsFeature FS-FileServer,Print-Server,FS-Resource-Manager -IncludeManagementTools
+New-Item -ItemType Directory -Path C:\Shares\Finance
+New-SmbShare -Name Finance$ -Path C:\Shares\Finance -FullAccess "Domain Admins" -ChangeAccess "GG-Finance-RW"
+icacls C:\Shares\Finance /inheritance:r
+icacls C:\Shares\Finance /grant "ACADEMY\GG-Finance-RW:(OI)(CI)M"</code></pre>
+      </article>
 
-        <article class="card">
-          <h3 data-i18n="lab3_title">Lab 3: Onboarding Microsoft 365</h3>
-          <ol>
-            <li data-i18n="lab3_step1">Conecteaza-te la Microsoft Graph PowerShell.</li>
-            <li data-i18n="lab3_step2">Creeaza un user cloud de test.</li>
-            <li data-i18n="lab3_step3">Aloca o licenta disponibila.</li>
-          </ol>
-          <pre><code>Connect-MgGraph -Scopes User.ReadWrite.All, Directory.ReadWrite.All
-New-MgUser -DisplayName "Lab User" -UserPrincipalName "lab.user@contoso.onmicrosoft.com" -MailNickname "labuser" -AccountEnabled
-Get-MgSubscribedSku</code></pre>
-        </article>
+      <article id="gpo-security" class="panel" data-search="gpo security audit windows defender firewall bitlocker">
+        <h2>GPO, Security, Audit</h2>
+        <pre><code>New-GPO -Name "Baseline-Workstations"
+New-GPLink -Name "Baseline-Workstations" -Target "OU=Workstations,DC=academy,DC=local"
+Set-NetFirewallProfile -Profile Domain,Private,Public -Enabled True
+auditpol /set /category:"Logon/Logoff" /success:enable /failure:enable</code></pre>
+      </article>
 
-        <article class="card">
-          <h3 data-i18n="lab4_title">Lab 4: Azure VM + Monitoring</h3>
-          <ol>
-            <li data-i18n="lab4_step1">Creeaza resource group pentru laborator.</li>
-            <li data-i18n="lab4_step2">Provisioneaza o VM Windows.</li>
-            <li data-i18n="lab4_step3">Verifica metricele de baza.</li>
-          </ol>
-          <pre><code>New-AzResourceGroup -Name rg-winlab -Location westeurope
-New-AzVM -ResourceGroupName rg-winlab -Name vm-win11lab -Location westeurope
-Get-AzMetricDefinition -ResourceId (Get-AzVM -Name vm-win11lab -ResourceGroupName rg-winlab).Id</code></pre>
-        </article>
-      </div>
-    </section>
+      <article id="win11" class="panel" data-search="windows 11 join domain rsat intune autopilot basic">
+        <h2>Windows 11 Integration</h2>
+        <p class="ro">Join la domeniu, RSAT pentru administrare și checklist de hardening client.</p>
+        <p class="en">Domain join, RSAT administration, and a client hardening checklist.</p>
+        <pre><code>Add-Computer -DomainName academy.local -Credential ACADEMY\Administrator -Restart
+Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
+Get-LocalUser
+Get-BitLockerVolume</code></pre>
+      </article>
 
-    <section id="resources" class="resources">
-      <h2 data-i18n="resources_title">Video si imagini utile</h2>
-      <div class="grid two">
-        <article class="card media-card">
-          <h3>Microsoft Mechanics</h3>
-          <p data-i18n="media1_desc">Canal oficial pentru demo-uri tehnice Windows, Azure si Microsoft 365.</p>
-          <a href="https://www.youtube.com/@MicrosoftMechanics" target="_blank" rel="noopener noreferrer">YouTube</a>
-        </article>
-        <article class="card media-card">
-          <h3>Microsoft Learn</h3>
-          <p data-i18n="media2_desc">Learning paths oficiale pentru certificari si laboratoare interactive.</p>
-          <a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">learn.microsoft.com</a>
-        </article>
-      </div>
-      <div class="image-row">
-        <img src="assets/images/eend.jpg" alt="Material vizual de laborator" />
-        <img src="assets/images/olifant.jpg" alt="Exemplu imagine pentru exercitii" />
-        <img src="assets/images/piano.jpg" alt="Asset media pentru practica" />
-      </div>
-    </section>
+      <article id="m365" class="panel" data-search="microsoft 365 graph exchange teams licensing">
+        <h2>Microsoft 365 Administration</h2>
+        <pre><code>Install-Module Microsoft.Graph -Scope CurrentUser
+Connect-MgGraph -Scopes User.ReadWrite.All,Directory.ReadWrite.All,Group.ReadWrite.All
+Get-MgOrganization
+Get-MgSubscribedSku
+New-MgUser -DisplayName "Lab User" -UserPrincipalName "lab.user@contoso.onmicrosoft.com" -MailNickname "labuser" -AccountEnabled</code></pre>
+      </article>
 
-    <section class="materials" id="materials">
-      <h2 data-i18n="materials_title">Materialele tale integrate</h2>
-      <div class="grid two">
-        <article class="card">
-          <h3 data-i18n="mat_server">Windows Server 2022 (PDF)</h3>
-          <ul>
-            <li><a href="Windows%20Server%202022/00-Inleiding.pdf" target="_blank">00-Inleiding</a></li>
-            <li><a href="Windows%20Server%202022/01-OpzettenDomein.pdf" target="_blank">01-OpzettenDomein</a></li>
-            <li><a href="Windows%20Server%202022/02-Accounts.pdf" target="_blank">02-Accounts</a></li>
-            <li><a href="Windows%20Server%202022/03-File%20Server.pdf" target="_blank">03-File Server</a></li>
-            <li><a href="Windows%20Server%202022/04-Gebruikersomgeving.pdf" target="_blank">04-Gebruikersomgeving</a></li>
-            <li><a href="Windows%20Server%202022/05-Printerbeheer.pdf" target="_blank">05-Printerbeheer</a></li>
-            <li><a href="Windows%20Server%202022/06-Serverbeheer.pdf" target="_blank">06-Serverbeheer</a></li>
-            <li><a href="Windows%20Server%202022/07-Disk%20Management.pdf" target="_blank">07-Disk Management</a></li>
-          </ul>
-        </article>
+      <article id="azure" class="panel" data-search="azure resource group vm monitoring backup costs">
+        <h2>Azure Operations</h2>
+        <pre><code>Connect-AzAccount
+New-AzResourceGroup -Name rg-enterprise-lab -Location westeurope
+New-AzVM -ResourceGroupName rg-enterprise-lab -Name vm-dc-test -Location westeurope
+Enable-AzVMPSRemoting -Name vm-dc-test -ResourceGroupName rg-enterprise-lab
+Get-AzConsumptionUsageDetail -StartDate (Get-Date).AddDays(-7) -EndDate (Get-Date)</code></pre>
+      </article>
 
-        <article class="card">
-          <h3 data-i18n="mat_client">Windows 11 + Azure (PDF)</h3>
-          <ul>
-            <li><a href="windows%2011/Windows11SyllabusV24H2.pdf" target="_blank">Windows11SyllabusV24H2</a></li>
-            <li><a href="Azure%20-%20Introductie%20Versie%202024-12.pdf" target="_blank">Azure - Introductie Versie 2024-12</a></li>
-            <li><a href="Windows%20Server%202022/Virtualbox%20Windows%20Server%20Router.pdf" target="_blank">Virtualbox Windows Server Router</a></li>
-          </ul>
-        </article>
-      </div>
+      <article id="labs" class="panel" data-search="labs mini labs troubleshooting validation">
+        <h2>Mini Labs (Hands-On)</h2>
+        <div class="lab-grid">
+          <div class="lab-card">
+            <h3>Lab A: Build Domain From Zero</h3>
+            <ol>
+              <li class="ro">Instaleaza rolurile AD DS + DNS + DHCP.</li><li class="en">Install AD DS + DNS + DHCP roles.</li>
+              <li class="ro">Creeaza OU-uri: Users, Computers, Servers.</li><li class="en">Create OUs: Users, Computers, Servers.</li>
+              <li class="ro">Valideaza join client Windows 11.</li><li class="en">Validate Windows 11 client domain join.</li>
+            </ol>
+          </div>
+          <div class="lab-card">
+            <h3>Lab B: Secure File Service</h3>
+            <ol>
+              <li class="ro">Creeaza share ascuns + permisiuni AGDLP.</li><li class="en">Create hidden share + AGDLP permissions.</li>
+              <li class="ro">Activeaza shadow copies si test restore.</li><li class="en">Enable shadow copies and test restore.</li>
+              <li class="ro">Configureaza FSRM quota si file screening.</li><li class="en">Configure FSRM quota and file screening.</li>
+            </ol>
+          </div>
+          <div class="lab-card">
+            <h3>Lab C: M365 + Azure Hybrid Basics</h3>
+            <ol>
+              <li class="ro">Creeaza utilizatori cloud + grupuri.</li><li class="en">Create cloud users + groups.</li>
+              <li class="ro">Deploy VM in Azure si verifica costuri.</li><li class="en">Deploy Azure VM and check costs.</li>
+              <li class="ro">Documenteaza runbook operational.</li><li class="en">Document an operational runbook.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article id="videos" class="panel" data-search="video tutorials microsoft learn youtube resources">
+        <h2>Video & Media Resources</h2>
+        <div class="resource-grid">
+          <a class="resource" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@MicrosoftMechanics">Microsoft Mechanics</a>
+          <a class="resource" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/training/">Microsoft Learn</a>
+          <a class="resource" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/windows-server/">Windows Server Docs</a>
+          <a class="resource" target="_blank" rel="noopener noreferrer" href="https://learn.microsoft.com/powershell/">PowerShell Docs</a>
+        </div>
+        <div class="image-row">
+          <img src="assets/images/eend.jpg" alt="Lab visual 1" />
+          <img src="assets/images/olifant.jpg" alt="Lab visual 2" />
+          <img src="assets/images/piano.jpg" alt="Lab visual 3" />
+        </div>
+      </article>
+
+      <article id="materials" class="panel" data-search="pdf courses provided files materiale">
+        <h2>Your Course Files (Integrated)</h2>
+        <div class="columns">
+          <div>
+            <h3>Windows Server 2022</h3>
+            <ul>
+              <li><a href="Windows%20Server%202022/00-Inleiding.pdf" target="_blank">00-Inleiding</a></li>
+              <li><a href="Windows%20Server%202022/01-OpzettenDomein.pdf" target="_blank">01-OpzettenDomein</a></li>
+              <li><a href="Windows%20Server%202022/02-Accounts.pdf" target="_blank">02-Accounts</a></li>
+              <li><a href="Windows%20Server%202022/03-File%20Server.pdf" target="_blank">03-File Server</a></li>
+              <li><a href="Windows%20Server%202022/04-Gebruikersomgeving.pdf" target="_blank">04-Gebruikersomgeving</a></li>
+              <li><a href="Windows%20Server%202022/05-Printerbeheer.pdf" target="_blank">05-Printerbeheer</a></li>
+              <li><a href="Windows%20Server%202022/06-Serverbeheer.pdf" target="_blank">06-Serverbeheer</a></li>
+              <li><a href="Windows%20Server%202022/07-Disk%20Management.pdf" target="_blank">07-Disk Management</a></li>
+              <li><a href="Windows%20Server%202022/Virtualbox%20Windows%20Server%20Router.pdf" target="_blank">Virtualbox Windows Server Router</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Windows 11 + Azure</h3>
+            <ul>
+              <li><a href="windows%2011/Windows11SyllabusV24H2.pdf" target="_blank">Windows11SyllabusV24H2</a></li>
+              <li><a href="Azure%20-%20Introductie%20Versie%202024-12.pdf" target="_blank">Azure Introductie 2024-12</a></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <footer class="footer">
+        <p class="ro">Construit pe materialele tale, extins pentru nivel enterprise, cu flux de invatare complet.</p>
+        <p class="en">Built on your materials, expanded to enterprise level with a full learning workflow.</p>
+      </footer>
     </section>
   </main>
-
-  <footer>
-    <p data-i18n="footer_text">Construit pentru invatare practica IT (RO/EN) cu materialele tale existente.</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
