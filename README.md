@@ -1,28 +1,28 @@
-# IT Academy Pro
+# IT Academy Pro - Multi-Page Course
 
-Refacut la nivel de portal de curs complet, in ordinea ceruta:
-1. Windows Server 2022
-2. Windows 11
-3. Azure
-4. Microsoft 365
-5. PowerShell
-6. CMD util
-7. Troubleshooting
+Portalul este reconstruit ca "page-by-page course":
+- `index.html` - prezentare + roadmap + video + imagini
+- `server.html` - Windows Server 2022 (lectii pas cu pas)
+- `win11.html` - Windows 11 (lectii pas cu pas)
+- `azure.html` - Azure (lectii pas cu pas)
+- `m365.html` - Microsoft 365 (modul separat)
+- `powershell.html` - PowerShell (modul separat)
+- `cmd.html` - CMD utilitar
+- `troubleshooting.html` - playbook-uri de incident
 
-Fiecare capitol include:
-- Teorie
+Fiecare pagina include:
+- Teorie explicita (RO/EN)
 - Pasi de executie
 - Verificare
-- Mini-lab
 - Comenzi utile
+- Navigare interactiva Previous/Next intre lectii
 
-Functii:
+Plus:
+- Meniu lateral
+- Buton Home
 - Cautare globala
-- Toggle RO/EN
-- Progress bar cu stocare locala
-- Design modern, responsive
-- Buton Home + meniu lateral pe sectiuni
 - Surse video oficiale
-- Galerie imagini externe pentru prezentare
+- Galerie imagini
 
-Publicare: GitHub Pages (`main` + `/root`)
+## Publicare
+GitHub Pages din branch `main`, folder `/ (root)`.
