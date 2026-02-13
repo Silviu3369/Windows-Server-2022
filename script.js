@@ -1,14 +1,13 @@
 ﻿const body = document.body;
 const langToggle = document.getElementById("langToggle");
-const lessonSearch = document.getElementById("lessonSearch");
-const links = Array.from(document.querySelectorAll(".toc-link"));
-const sections = Array.from(document.querySelectorAll(".panel[id]"));
-const checks = Array.from(document.querySelectorAll("input[type='checkbox'][data-progress]"));
+const searchInput = document.getElementById("lessonSearch");
+const searchable = Array.from(document.querySelectorAll(".lesson, .mini"));
+const checkboxes = Array.from(document.querySelectorAll("input[type='checkbox'][data-progress]"));
 
 const LANG_KEY = "academy_lang";
-const PROGRESS_KEY = "academy_progress";
+const PROGRESS_KEY = "academy_progress_v2";
 
-function setLanguage(lang) {
+function setLang(lang) {
   const isEn = lang === "en";
   body.classList.toggle("lang-en", isEn);
   document.documentElement.lang = isEn ? "en" : "ro";
@@ -16,9 +15,9 @@ function setLanguage(lang) {
   localStorage.setItem(LANG_KEY, lang);
 }
 
-function loadLanguage() {
+function loadLang() {
   const saved = localStorage.getItem(LANG_KEY);
-  setLanguage(saved === "en" ? "en" : "ro");
+  setLang(saved === "en" ? "en" : "ro");
 }
 
 function loadProgress() {
@@ -29,61 +28,35 @@ function loadProgress() {
     data = {};
   }
 
-  checks.forEach((check) => {
-    const key = check.dataset.progress;
-    check.checked = Boolean(data[key]);
-    check.addEventListener("change", () => {
-      data[key] = check.checked;
+  checkboxes.forEach((box) => {
+    const key = box.dataset.progress;
+    box.checked = Boolean(data[key]);
+    box.addEventListener("change", () => {
+      data[key] = box.checked;
       localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
     });
   });
 }
 
-function filterContent(query) {
-  const q = query.trim().toLowerCase();
-
-  sections.forEach((section) => {
-    const text = `${section.id} ${section.dataset.search || ""} ${section.textContent}`.toLowerCase();
-    const match = q === "" || text.includes(q);
-    section.classList.toggle("hidden-section", !match);
-  });
-
-  links.forEach((link) => {
-    const id = link.getAttribute("href").replace("#", "");
-    const section = document.getElementById(id);
-    const visible = section && !section.classList.contains("hidden-section");
-    link.classList.toggle("hidden-link", !visible);
-  });
-}
-
-function markActiveLink() {
-  const visibleSections = sections.filter((s) => !s.classList.contains("hidden-section"));
-  const fromTop = window.scrollY + 120;
-
-  let current = visibleSections[0]?.id || "";
-  for (const section of visibleSections) {
-    if (section.offsetTop <= fromTop) current = section.id;
-  }
-
-  links.forEach((link) => {
-    const id = link.getAttribute("href").slice(1);
-    link.classList.toggle("active", id === current);
+function applySearch(value) {
+  const q = value.trim().toLowerCase();
+  searchable.forEach((el) => {
+    const text = `${el.dataset.search || ""} ${el.textContent}`.toLowerCase();
+    const match = !q || text.includes(q);
+    el.classList.toggle("hidden", !match);
   });
 }
 
 langToggle.addEventListener("click", () => {
-  setLanguage(body.classList.contains("lang-en") ? "ro" : "en");
+  setLang(body.classList.contains("lang-en") ? "ro" : "en");
 });
 
-lessonSearch.addEventListener("input", (e) => {
-  filterContent(e.target.value);
-  markActiveLink();
+searchInput.addEventListener("input", (e) => {
+  applySearch(e.target.value);
 });
 
-window.addEventListener("scroll", markActiveLink);
 window.addEventListener("load", () => {
-  loadLanguage();
+  loadLang();
   loadProgress();
-  filterContent("");
-  markActiveLink();
+  applySearch("");
 });
