@@ -1,25 +1,25 @@
-# Enterprise IT Learning Portal (RO/EN)
+# IT Academy Pro
 
-Portalul este reconstruit pe structura ceruta:
-1. Windows Server 2022 (00-07 + Virtualbox Router)
-2. Windows 11 (cap. 1-18)
-3. Azure (cap. 1-10)
+Refacut la nivel de portal de curs complet, in ordinea ceruta:
+1. Windows Server 2022
+2. Windows 11
+3. Azure
 4. Microsoft 365
 5. PowerShell
-6. CMD utile
+6. CMD util
 7. Troubleshooting
 
-Fiecare modul are:
+Fiecare capitol include:
 - Teorie
-- Pasi de lucru
+- Pasi de executie
 - Verificare
+- Mini-lab
 - Comenzi utile
 
-## Publicare GitHub Pages
+Functii:
+- Cautare globala
+- Toggle RO/EN
+- Progress bar cu stocare locala
+- Design modern, responsive
 
-- `Settings` -> `Pages`
-- `Deploy from a branch`
-- Branch `main`, folder `/ (root)`
-
-URL live:
-`https://silviu3369.github.io/Windows-Server-2022/`
+Publicare: GitHub Pages (`main` + `/root`)
