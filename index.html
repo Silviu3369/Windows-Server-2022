@@ -13,68 +13,146 @@
   <header class="topbar">
     <div class="brand">
       <strong>IT Academy Pro</strong>
-      <span class="ro">Curs IT pas cu pas in romana si engleza</span>
-      <span class="en">Step-by-step IT course in Romanian and English</span>
+      <span class="ro">Portal de invatare IT, structurat pe cursuri complete</span>
+      <span class="en">IT learning portal structured as complete courses</span>
     </div>
     <div class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
-      <input id="globalSearch" type="search" placeholder="Cauta pagina sau subiect..." />
+      <input id="globalSearch" type="search" placeholder="Cauta in pagina..." />
       <button id="langToggle" class="lang-btn">EN</button>
     </div>
   </header>
 
-  <div class="shell">
+  <div class="layout">
     <aside class="sidebar">
-      <a href="index.html">Home</a>
-      <a href="server.html">Windows Server 2022</a>
-      <a href="win11.html">Windows 11</a>
-      <a href="azure.html">Azure</a>
-      <a href="m365.html">Microsoft 365</a>
-      <a href="powershell.html">PowerShell</a>
-      <a href="cmd.html">CMD Util</a>
-      <a href="troubleshooting.html">Troubleshooting</a>
-      <a href="#video">Video</a>
-      <a href="#images">Imagini</a>
+      <div class="menu-section">
+        <p class="menu-title">Home</p>
+        <a href="#top">Despre site</a>
+        <a href="#scop">Scop</a>
+        <a href="#metoda">Metoda de invatare</a>
+      </div>
+      <div class="menu-section">
+        <p class="menu-title">Cursuri</p>
+        <a href="server.html">Windows Server 2022</a>
+        <a class="sub" href="server.html#ch00">00 Inleiding</a>
+        <a class="sub" href="server.html#ch01">01 OpzettenDomein</a>
+        <a class="sub" href="server.html#ch02">02 Accounts</a>
+        <a class="sub" href="server.html#ch03">03 File Server</a>
+        <a class="sub" href="server.html#ch04">04 Gebruikersomgeving</a>
+        <a class="sub" href="server.html#ch05">05 Printerbeheer</a>
+        <a class="sub" href="server.html#ch06">06 Serverbeheer</a>
+        <a class="sub" href="server.html#ch07">07 Disk Management</a>
+        <a class="sub" href="server.html#router">Virtualbox Router Lab</a>
+
+        <a href="win11.html">Windows 11</a>
+        <a class="sub" href="win11.html#w11-1">Cap. 1-4 Fundamentals</a>
+        <a class="sub" href="win11.html#w11-5">Cap. 5-8 File/Storage</a>
+        <a class="sub" href="win11.html#w11-9">Cap. 9-12 Networking/Devices</a>
+        <a class="sub" href="win11.html#w11-13">Cap. 13-18 Security/Recovery</a>
+
+        <a href="azure.html">Azure</a>
+        <a class="sub" href="azure.html#az-1">Cap. 1-2 Cloud + Access</a>
+        <a class="sub" href="azure.html#az-3">Cap. 3-5 VM/Storage/Network</a>
+        <a class="sub" href="azure.html#az-6">Cap. 6-10 App/DB/Cost/MFA</a>
+
+        <a href="m365.html">Microsoft 365</a>
+        <a href="powershell.html">PowerShell</a>
+        <a href="cmd.html">CMD Util</a>
+        <a href="troubleshooting.html">Troubleshooting</a>
+      </div>
+      <div class="menu-section">
+        <p class="menu-title">Resurse</p>
+        <a href="#video">Surse video</a>
+        <a href="#materials">Materiale PDF</a>
+      </div>
     </aside>
 
     <main class="main">
-      <section class="hero card searchable" data-search="home overview curs microsoft windows azure m365 powershell">
-        <h1 class="ro">Curs Profesional de Administrare IT</h1>
-        <h1 class="en">Professional IT Administration Course</h1>
-        <p class="ro">Platforma este organizata pe pagini separate, ca un curs real: fiecare modul are teorie, pasi clari, verificare, mini-laburi si comenzi practice.</p>
-        <p class="en">The platform is organized as separate pages like a real course: each module includes theory, clear steps, validation, mini-labs, and practical commands.</p>
+      <section class="hero card searchable" data-search="despre site scop curs">
+        <h1 class="ro">Platforma de curs pas cu pas (RO/EN)</h1>
+        <h1 class="en">Step-by-step course platform (RO/EN)</h1>
+        <p class="ro">Acest site nu este o simpla lista de comenzi. Este structurat ca un manual de studiu: teorie explicata clar, proceduri pas cu pas, exemple reale, verificari la finalul fiecarei lectii si mini-laburi.</p>
+        <p class="en">This site is not a simple list of commands. It is structured like a study manual: clear theory, step-by-step procedures, real examples, end-of-lesson validation, and mini-labs.</p>
       </section>
 
-      <section class="card searchable" data-search="learning path roadmap">
-        <h2 class="ro">Parcurs recomandat</h2>
-        <h2 class="en">Recommended path</h2>
-        <div class="path-grid">
-          <article class="path-card"><h3>1. Windows Server 2022</h3><p class="ro">Fundatia: AD, File Server, GPO, management.</p><p class="en">Foundation: AD, File Server, GPO, management.</p><a href="server.html">Deschide modul</a></article>
-          <article class="path-card"><h3>2. Windows 11</h3><p class="ro">Client administration, securitate, troubleshooting.</p><p class="en">Client administration, security, troubleshooting.</p><a href="win11.html">Deschide modul</a></article>
-          <article class="path-card"><h3>3. Azure</h3><p class="ro">Cloud operations: VM, storage, networking, cost.</p><p class="en">Cloud operations: VM, storage, networking, cost.</p><a href="azure.html">Deschide modul</a></article>
-          <article class="path-card"><h3>4. Microsoft 365</h3><p class="ro">Identitate, Exchange, Teams, SharePoint.</p><p class="en">Identity, Exchange, Teams, SharePoint.</p><a href="m365.html">Deschide modul</a></article>
-          <article class="path-card"><h3>5. PowerShell</h3><p class="ro">Automatizare administrativa pas cu pas.</p><p class="en">Administrative automation step by step.</p><a href="powershell.html">Deschide modul</a></article>
-          <article class="path-card"><h3>6. CMD + Troubleshooting</h3><p class="ro">Comenzi rapide si playbook-uri de incident.</p><p class="en">Fast commands and incident playbooks.</p><a href="troubleshooting.html">Deschide modul</a></article>
+      <section id="scop" class="card searchable" data-search="scop obiectiv rezultate invatare">
+        <h2 class="ro">Scopul platformei</h2>
+        <h2 class="en">Platform objective</h2>
+        <div class="grid-two">
+          <div class="block">
+            <h4 class="ro">Ce inveti concret</h4>
+            <h4 class="en">What you will concretely learn</h4>
+            <ul>
+              <li class="ro">Administrare completa Windows Server 2022 in mediu de domeniu.</li>
+              <li class="ro">Administrare client Windows 11 pentru productie.</li>
+              <li class="ro">Operatiuni Azure: VM, Storage, Networking, Cost.</li>
+              <li class="ro">Operatiuni Microsoft 365: identitate, colaborare, securitate.</li>
+              <li class="en">Full Windows Server 2022 administration in domain environments.</li>
+              <li class="en">Windows 11 client administration for production usage.</li>
+              <li class="en">Azure operations: VM, Storage, Networking, Cost.</li>
+              <li class="en">Microsoft 365 operations: identity, collaboration, security.</li>
+            </ul>
+          </div>
+          <div class="block">
+            <h4 class="ro">Rezultat final</h4>
+            <h4 class="en">Final outcome</h4>
+            <ul>
+              <li class="ro">Poti proiecta, implementa si verifica infrastructura Microsoft end-to-end.</li>
+              <li class="ro">Poti documenta si standardiza proceduri operationale.</li>
+              <li class="ro">Poti depana incidente uzuale cu playbook-uri clare.</li>
+              <li class="en">You can design, implement, and validate end-to-end Microsoft infrastructure.</li>
+              <li class="en">You can document and standardize operational procedures.</li>
+              <li class="en">You can troubleshoot common incidents with clear playbooks.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <section id="video" class="card searchable" data-search="video tutorial microsoft mechanics learn">
+      <section id="metoda" class="card searchable" data-search="metoda teorie pasi verificare lab">
+        <h2 class="ro">Metoda de invatare folosita in toate modulele</h2>
+        <h2 class="en">Learning method used across all modules</h2>
+        <div class="grid-two">
+          <div class="block"><h4>1. Teorie</h4><p class="ro">Explica "de ce" exista tehnologia si ce problema rezolva in practica.</p><p class="en">Explains "why" the technology exists and which practical problem it solves.</p></div>
+          <div class="block"><h4>2. Pasi</h4><p class="ro">Executie ordonata, fara sarituri, de la configuratie la validare.</p><p class="en">Ordered execution, no shortcuts, from configuration to validation.</p></div>
+          <div class="block"><h4>3. Exemple</h4><p class="ro">Comenzi reale si scenarii reale de administrare.</p><p class="en">Real commands and real administration scenarios.</p></div>
+          <div class="block"><h4>4. Verificare</h4><p class="ro">Checklist clar: ce trebuie sa vezi la final ca sa stii ca este corect.</p><p class="en">Clear checklist: what you must see at the end to confirm correctness.</p></div>
+        </div>
+      </section>
+
+      <section id="video" class="card searchable" data-search="video microsoft learn mechanics">
         <h2 class="ro">Surse video recomandate</h2>
         <h2 class="en">Recommended video sources</h2>
-        <div class="resources">
-          <article class="path-card"><h3>Microsoft Learn</h3><p class="ro">Learning paths oficiale.</p><p class="en">Official learning paths.</p><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">Open</a></article>
-          <article class="path-card"><h3>Microsoft Mechanics</h3><p class="ro">Demo-uri practice enterprise.</p><p class="en">Enterprise practical demos.</p><a href="https://www.youtube.com/@MicrosoftMechanics" target="_blank" rel="noopener noreferrer">Open</a></article>
-          <article class="path-card"><h3>Windows Server Docs</h3><p class="ro">Documentatie tehnica oficiala.</p><p class="en">Official technical documentation.</p><a href="https://learn.microsoft.com/windows-server/" target="_blank" rel="noopener noreferrer">Open</a></article>
+        <div class="grid-two">
+          <div class="block"><h4>Microsoft Learn</h4><p class="ro">Cursuri oficiale si labs interactive.</p><p class="en">Official courses and interactive labs.</p><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">Open</a></div>
+          <div class="block"><h4>Microsoft Mechanics</h4><p class="ro">Demo-uri tehnice enterprise.</p><p class="en">Enterprise technical demos.</p><a href="https://www.youtube.com/@MicrosoftMechanics" target="_blank" rel="noopener noreferrer">Open</a></div>
         </div>
       </section>
 
-      <section id="images" class="card searchable" data-search="images gallery datacenter cloud it">
-        <h2 class="ro">Galerie vizuala</h2>
-        <h2 class="en">Visual gallery</h2>
-        <div class="image-grid">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Datacenter" />
-          <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80" alt="Server hardware" />
-          <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=1200&q=80" alt="Cloud workstation" />
+      <section id="materials" class="card searchable" data-search="pdf materiale windows server windows 11 azure">
+        <h2 class="ro">Materiale sursa folosite</h2>
+        <h2 class="en">Source materials used</h2>
+        <div class="grid-two">
+          <div class="block">
+            <h4>Windows Server 2022</h4>
+            <ul>
+              <li><a href="Windows%20Server%202022/00-Inleiding.pdf" target="_blank">00-Inleiding</a></li>
+              <li><a href="Windows%20Server%202022/01-OpzettenDomein.pdf" target="_blank">01-OpzettenDomein</a></li>
+              <li><a href="Windows%20Server%202022/02-Accounts.pdf" target="_blank">02-Accounts</a></li>
+              <li><a href="Windows%20Server%202022/03-File%20Server.pdf" target="_blank">03-File Server</a></li>
+              <li><a href="Windows%20Server%202022/04-Gebruikersomgeving.pdf" target="_blank">04-Gebruikersomgeving</a></li>
+              <li><a href="Windows%20Server%202022/05-Printerbeheer.pdf" target="_blank">05-Printerbeheer</a></li>
+              <li><a href="Windows%20Server%202022/06-Serverbeheer.pdf" target="_blank">06-Serverbeheer</a></li>
+              <li><a href="Windows%20Server%202022/07-Disk%20Management.pdf" target="_blank">07-Disk Management</a></li>
+              <li><a href="Windows%20Server%202022/Virtualbox%20Windows%20Server%20Router.pdf" target="_blank">Virtualbox Windows Server Router</a></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h4>Windows 11 + Azure</h4>
+            <ul>
+              <li><a href="windows%2011/Windows11SyllabusV24H2.pdf" target="_blank">Windows11SyllabusV24H2</a></li>
+              <li><a href="Azure%20-%20Introductie%20Versie%202024-12.pdf" target="_blank">Azure Introductie 2024-12</a></li>
+            </ul>
+          </div>
         </div>
       </section>
     </main>

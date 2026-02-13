@@ -1,4 +1,4 @@
-﻿const LANG_KEY = "academy_lang_v4";
+﻿const LANG_KEY = "academy_lang_v5";
 
 function applyLang(lang) {
   const en = lang === "en";
@@ -9,15 +9,11 @@ function applyLang(lang) {
   localStorage.setItem(LANG_KEY, lang);
 }
 
-function setupLanguage() {
+function setupLang() {
   const saved = localStorage.getItem(LANG_KEY);
   applyLang(saved === "en" ? "en" : "ro");
   const btn = document.getElementById("langToggle");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      applyLang(document.body.classList.contains("lang-en") ? "ro" : "en");
-    });
-  }
+  if (btn) btn.addEventListener("click", () => applyLang(document.body.classList.contains("lang-en") ? "ro" : "en"));
 }
 
 function setupSearch() {
@@ -26,69 +22,38 @@ function setupSearch() {
   input.addEventListener("input", (e) => {
     const q = e.target.value.trim().toLowerCase();
     document.querySelectorAll(".searchable").forEach((el) => {
-      const text = `${el.dataset.search || ""} ${el.textContent}`.toLowerCase();
-      el.classList.toggle("hidden", q && !text.includes(q));
+      const t = `${el.dataset.search || ""} ${el.textContent}`.toLowerCase();
+      el.classList.toggle("hidden", q && !t.includes(q));
     });
   });
 }
 
-function setFlowStep(flow, idx) {
+function setStep(flow, idx) {
   const steps = Array.from(flow.querySelectorAll(".step"));
-  const tabs = Array.from(flow.querySelectorAll(".flow-tab"));
   if (!steps.length) return;
   let i = idx;
   if (i < 0) i = 0;
   if (i > steps.length - 1) i = steps.length - 1;
   steps.forEach((s, n) => s.classList.toggle("active", n === i));
-  tabs.forEach((t, n) => t.classList.toggle("active", n === i));
   flow.dataset.current = String(i);
 }
 
 function setupFlows() {
   document.querySelectorAll(".flow").forEach((flow) => {
-    const tabs = Array.from(flow.querySelectorAll(".flow-tab"));
+    const tabs = Array.from(flow.querySelectorAll("[data-step-index]"));
     const prev = flow.querySelector(".prev-step");
     const next = flow.querySelector(".next-step");
-
-    tabs.forEach((tab, i) => {
-      tab.addEventListener("click", () => setFlowStep(flow, i));
+    tabs.forEach((t) => {
+      t.addEventListener("click", () => {
+        setStep(flow, Number(t.dataset.stepIndex || 0));
+      });
     });
-
-    if (prev) {
-      prev.addEventListener("click", () => {
-        const current = Number(flow.dataset.current || 0);
-        setFlowStep(flow, current - 1);
-      });
-    }
-
-    if (next) {
-      next.addEventListener("click", () => {
-        const current = Number(flow.dataset.current || 0);
-        setFlowStep(flow, current + 1);
-      });
-    }
-
-    setFlowStep(flow, 0);
+    if (prev) prev.addEventListener("click", () => setStep(flow, Number(flow.dataset.current || 0) - 1));
+    if (next) next.addEventListener("click", () => setStep(flow, Number(flow.dataset.current || 0) + 1));
+    setStep(flow, 0);
   });
 }
 
-function setupActiveSidebar() {
-  const links = Array.from(document.querySelectorAll(".sidebar a[href^='#']"));
-  if (!links.length) return;
-  const onScroll = () => {
-    let current = "";
-    document.querySelectorAll("section[id]").forEach((sec) => {
-      if (sec.offsetTop <= window.scrollY + 130) current = sec.id;
-    });
-    links.forEach((l) => {
-      l.classList.toggle("active", l.getAttribute("href") === `#${current}`);
-    });
-  };
-  window.addEventListener("scroll", onScroll);
-  onScroll();
-}
-
-setupLanguage();
+setupLang();
 setupSearch();
 setupFlows();
-setupActiveSidebar();

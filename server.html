@@ -9,143 +9,206 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body id="top">
   <header class="topbar">
-    <div class="brand"><strong>Windows Server 2022 Course</strong><span class="ro">Lecții pas cu pas din materialul tău</span><span class="en">Step-by-step lessons from your materials</span></div>
+    <div class="brand">
+      <strong>Windows Server 2022</strong>
+      <span class="ro">Curs complet: teorie + pasi + exemple + verificare</span>
+      <span class="en">Complete course: theory + steps + examples + validation</span>
+    </div>
     <div class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
-      <input id="globalSearch" type="search" placeholder="Cauta in lectii..." />
+      <input id="globalSearch" type="search" placeholder="Cauta capitol sau termen..." />
       <button id="langToggle" class="lang-btn">EN</button>
     </div>
   </header>
 
-  <div class="shell">
+  <div class="layout">
     <aside class="sidebar">
-      <a href="index.html">Home</a>
-      <a href="server.html">Windows Server 2022</a>
-      <a href="win11.html">Windows 11</a>
-      <a href="azure.html">Azure</a>
-      <a href="m365.html">Microsoft 365</a>
-      <a href="powershell.html">PowerShell</a>
-      <a href="cmd.html">CMD Util</a>
-      <a href="troubleshooting.html">Troubleshooting</a>
+      <div class="menu-section">
+        <p class="menu-title">Navigare</p>
+        <a href="index.html">Home</a>
+        <a href="#top">Intro modul</a>
+      </div>
+      <div class="menu-section">
+        <p class="menu-title">Capitole</p>
+        <a href="#ch00">00 Inleiding</a>
+        <a class="sub" href="#ch00-s1">Client vs Server</a>
+        <a class="sub" href="#ch00-s2">Editii si cerinte</a>
+
+        <a href="#ch01">01 OpzettenDomein</a>
+        <a class="sub" href="#ch01-s1">AD DS structura</a>
+        <a class="sub" href="#ch01-s2">Instalare domeniu</a>
+
+        <a href="#ch02">02 Accounts</a>
+        <a class="sub" href="#ch02-s1">OU + Accounts</a>
+        <a class="sub" href="#ch02-s2">Delegare</a>
+
+        <a href="#ch03">03 File Server</a>
+        <a class="sub" href="#ch03-s1">NTFS + Share</a>
+        <a class="sub" href="#ch03-s2">Quota + FSRM</a>
+
+        <a href="#ch04">04 Gebruikersomgeving</a>
+        <a class="sub" href="#ch04-s1">Profiles</a>
+        <a class="sub" href="#ch04-s2">GPO</a>
+
+        <a href="#ch05">05 Printerbeheer</a>
+        <a href="#ch06">06 Serverbeheer</a>
+        <a href="#ch07">07 Disk Management</a>
+        <a href="#router">Virtualbox Router</a>
+      </div>
+      <div class="menu-section">
+        <p class="menu-title">Alte module</p>
+        <a href="win11.html">Windows 11</a>
+        <a href="azure.html">Azure</a>
+        <a href="m365.html">Microsoft 365</a>
+        <a href="powershell.html">PowerShell</a>
+        <a href="cmd.html">CMD Util</a>
+        <a href="troubleshooting.html">Troubleshooting</a>
+      </div>
     </aside>
 
     <main class="main">
-      <section class="flow">
-        <div class="flow-head card searchable" data-search="windows server 2022 active directory file server gpo">
-          <h2 class="ro">Windows Server 2022 - Curs complet (8 lecții)</h2>
-          <h2 class="en">Windows Server 2022 - Full course (8 lessons)</h2>
-          <p class="ro">Bază: 00-Inleiding, 01-OpzettenDomein, 02-Accounts, 03-File Server, 04-Gebruikersomgeving, 05-Printerbeheer, 06-Serverbeheer, 07-Disk Management.</p>
-          <p class="en">Based on: 00-Inleiding, 01-OpzettenDomein, 02-Accounts, 03-File Server, 04-Gebruikersomgeving, 05-Printerbeheer, 06-Serverbeheer, 07-Disk Management.</p>
+      <section class="hero card searchable" data-search="windows server 2022 introducere">
+        <h1 class="ro">Windows Server 2022 - Ghid complet de invatare</h1>
+        <h1 class="en">Windows Server 2022 - Complete learning guide</h1>
+        <p class="ro">Modulul este bazat direct pe cursurile tale (00-07 + Router). Fiecare capitol include explicatii teoretice extinse, procedura pas cu pas, exemple PowerShell si checklist de verificare.</p>
+        <p class="en">This module is directly based on your courses (00-07 + Router). Each chapter includes extended theory, step-by-step procedure, PowerShell examples, and validation checklist.</p>
+      </section>
+
+      <section id="ch00" class="card searchable" data-search="00 inleiding client server editie cerinte">
+        <h2>00 - Inleiding</h2>
+        <div class="lesson" id="ch00-s1">
+          <h3>Subcapitol: Windows Client vs Windows Server</h3>
+          <p class="ro">Teorie: un sistem Windows Client este optimizat pentru productivitate individuala, in timp ce Windows Server este optimizat pentru servicii multi-user, disponibilitate, securitate centralizata si administrare la scara. In practica, serverul devine sursa de adevar pentru identitate, politici si date partajate.</p>
+          <p class="en">Theory: Windows Client is optimized for individual productivity, while Windows Server is optimized for multi-user services, availability, centralized security, and scalable administration. In practice, the server becomes the source of truth for identity, policy, and shared data.</p>
+          <div class="grid-two"><div class="block"><h4>Pasi / Steps</h4><ol><li>Defineste rolurile serverului (DC, File, Print).</li><li>Stabileste cine administreaza fiecare rol.</li><li>Documenteaza dependentele intre roluri.</li></ol></div><div class="block"><h4>Verificare / Validation</h4><ul><li>Rolurile sunt clar separate.</li><li>Exista schema operationala scrisa.</li></ul></div></div>
         </div>
-
-        <div class="flow-nav">
-          <button class="flow-tab">L1 Fundament</button>
-          <button class="flow-tab">L2 AD DS</button>
-          <button class="flow-tab">L3 Accounts</button>
-          <button class="flow-tab">L4 File Server</button>
-          <button class="flow-tab">L5 GPO</button>
-          <button class="flow-tab">L6 Printing</button>
-          <button class="flow-tab">L7 Server Mgmt</button>
-          <button class="flow-tab">L8 Disk Mgmt</button>
+        <div class="lesson" id="ch00-s2">
+          <h3>Subcapitol: Editii, interface type, sistem requirements</h3>
+          <p class="ro">Teorie: alegerea editiei (Standard/Datacenter) influenteaza capabilitatile de virtualizare si scalare. Cerintele hardware minime sunt punct de pornire, nu tinta de productie. Pentru stabilitate, planifica resurse peste minim (CPU/RAM/storage) si monitorizare permanenta.</p>
+          <p class="en">Theory: edition choice (Standard/Datacenter) impacts virtualization and scaling capabilities. Minimum hardware requirements are a starting point, not a production target. For stability, plan above minimum (CPU/RAM/storage) and monitor continuously.</p>
+          <pre><code>Get-ComputerInfo | Select WindowsProductName,WindowsVersion,CsTotalPhysicalMemory
+Get-NetAdapter
+systeminfo</code></pre>
         </div>
+      </section>
 
-        <article class="step card searchable" data-search="fundament windows server editie roluri">
-          <h3>L1. Fundament și arhitectură</h3>
-          <p class="ro">Teorie: Windows Server este construit pentru servicii multi-user, centralizare, securitate și management. Înainte de configurări, definești rolurile (DC, file, print, management), standardele de naming și schema logică de rețea.</p>
-          <p class="en">Theory: Windows Server is designed for multi-user services, centralization, security, and management. Before configuration, define roles (DC, file, print, management), naming standards, and network logic.</p>
-          <div class="lesson-meta">
-            <div class="meta-block"><h4>Pași / Steps</h4><ol><li>Definește obiectivul fiecărui server.</li><li>Creează nomenclatură (hostname, OU, grupuri).</li><li>Stabilește baseline de securitate.</li></ol></div>
-            <div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Documentul de design e complet.</li><li>Toți membrii echipei înțeleg topologia.</li></ul></div>
-          </div>
-          <pre><code>Get-ComputerInfo | Select WindowsProductName,WindowsVersion
-Get-NetIPConfiguration
-hostname</code></pre>
-        </article>
-
-        <article class="step card searchable" data-search="active directory domain services kerberos fsmo">
-          <h3>L2. Active Directory Domain Services</h3>
-          <p class="ro">Teorie: AD DS oferă identitate centralizată, autentificare Kerberos, autorizații și politici. Forest/domain/OUs definesc structura logică a organizației.</p>
-          <p class="en">Theory: AD DS provides centralized identity, Kerberos authentication, authorization, and policies. Forest/domain/OUs define your organization logic.</p>
-          <div class="lesson-meta">
-            <div class="meta-block"><h4>Pași / Steps</h4><ol><li>Instalează AD DS + DNS.</li><li>Promovează Domain Controller.</li><li>Verifică health-ul domainului.</li></ol></div>
-            <div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Domain join funcțional.</li><li>dcdiag fără erori critice.</li></ul></div>
-          </div>
+      <section id="ch01" class="card searchable" data-search="01 opzettendomein ad ds forest domain ou kerberos fsmo">
+        <h2>01 - OpzettenDomein (AD DS)</h2>
+        <div class="lesson" id="ch01-s1">
+          <h3>Subcapitol: Structura AD DS</h3>
+          <p class="ro">Teorie: AD DS este directory service-ul care organizeaza obiectele IT in structuri logice (forest, domain, OU). Forest-ul defineste limita de securitate superioara. Domeniul gestioneaza identitatea si autentificarea. OU-urile permit delegare si aplicare de politici pe segmente organizationale.</p>
+          <p class="en">Theory: AD DS is the directory service that organizes IT objects into logical structures (forest, domain, OU). Forest defines the top security boundary. Domain handles identity and authentication. OUs enable delegation and policy application by organizational segment.</p>
+        </div>
+        <div class="lesson" id="ch01-s2">
+          <h3>Subcapitol: Instalare domeniu pas cu pas</h3>
+          <div class="grid-two"><div class="block"><h4>Pasi / Steps</h4><ol><li>Instaleaza AD DS + DNS role.</li><li>Promoveaza serverul in Domain Controller nou.</li><li>Configureaza DNS intern ca sursa primara.</li><li>Testeaza autentificare domeniu.</li></ol></div><div class="block"><h4>Verificare / Validation</h4><ul><li>Get-ADDomain returneaza domeniul corect.</li><li>dcdiag nu afiseaza erori critice.</li><li>Clientul poate face domain join.</li></ul></div></div>
           <pre><code>Install-WindowsFeature AD-Domain-Services,DNS -IncludeManagementTools
 Install-ADDSForest -DomainName "academy.local" -DomainNetbiosName "ACADEMY"
 Get-ADDomain
 dcdiag /v</code></pre>
-        </article>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="accounts users groups organizational units delegation">
-          <h3>L3. Accounts, Groups și OUs</h3>
-          <p class="ro">Teorie: Identitatea în AD trebuie structurată. Creezi OU-uri pe funcție, grupuri pe rol și aplici delegare minimă pentru operațiuni sigure.</p>
-          <p class="en">Theory: AD identity must be structured. Build OUs by function, groups by role, and apply minimal delegation for secure operations.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Creează OU pe departamente.</li><li>Definește grupuri GG/permissions.</li><li>Adaugă utilizatori și testează accesul.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Obiectele sunt în OU-ul corect.</li><li>Delegarea funcționează.</li></ul></div></div>
+      <section id="ch02" class="card searchable" data-search="02 accounts users groups ou rsat delegation">
+        <h2>02 - Accounts</h2>
+        <div class="lesson" id="ch02-s1">
+          <h3>Subcapitol: OU, users, groups</h3>
+          <p class="ro">Teorie: managementul identitatii trebuie sa urmeze un model predictibil. Creezi OU-uri pentru structura organizationala, grupuri pentru permisiuni si utilizatori pentru identitate. Evita acordarea de permisiuni direct pe user cand poti folosi grupuri.</p>
+          <p class="en">Theory: identity management must follow a predictable model. Use OUs for organizational structure, groups for permissions, and users for identity. Avoid direct user permissions when group-based assignment is possible.</p>
           <pre><code>New-ADOrganizationalUnit -Name "HR" -Path "DC=academy,DC=local"
-New-ADUser -Name "Ana Pop" -SamAccountName apop -Enabled $true -AccountPassword (ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force)
 New-ADGroup -Name "GG-HR-RW" -GroupScope Global -GroupCategory Security
+New-ADUser -Name "Ana Pop" -SamAccountName apop -Enabled $true -AccountPassword (ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force)
 Add-ADGroupMember -Identity "GG-HR-RW" -Members apop</code></pre>
-        </article>
+        </div>
+        <div class="lesson" id="ch02-s2">
+          <h3>Subcapitol: Delegare control</h3>
+          <p class="ro">Teorie: delegarea permite operationalizare fara a distribui drepturi Domain Admin. Atribui exact taskurile necesare (reset password, create users, manage groups) unui grup operational.</p>
+          <p class="en">Theory: delegation enables operations without distributing Domain Admin rights. Assign only required tasks (reset password, create users, manage groups) to an operational group.</p>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="file server ntfs smb permissions">
-          <h3>L4. File Server și securitatea datelor</h3>
-          <p class="ro">Teorie: Separi share permissions de NTFS permissions. Folosești grupuri, nu utilizatori direcți, și impui quota pentru controlul consumului.</p>
-          <p class="en">Theory: Separate share permissions from NTFS permissions. Use groups, not direct users, and enforce quotas for storage control.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Instalează rolul File Server.</li><li>Creează structura de share-uri.</li><li>Aplică AGDLP + quota.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Acces controlat per grup.</li><li>Cota blochează depășirea.</li></ul></div></div>
+      <section id="ch03" class="card searchable" data-search="03 file server ntfs permissions share quota fsrm">
+        <h2>03 - File Server</h2>
+        <div class="lesson" id="ch03-s1">
+          <h3>Subcapitol: NTFS + Share permissions</h3>
+          <p class="ro">Teorie: securitatea pe fisiere are doua straturi: share permissions (acces la share) si NTFS ACL (acces la obiecte). Efectivul final este combinatia lor. In productie, mentii share permissions simple si controlezi granularitatea prin NTFS + grupuri.</p>
+          <p class="en">Theory: file security has two layers: share permissions (share access) and NTFS ACL (object access). Effective access is their combination. In production, keep share permissions simple and use NTFS + groups for granular control.</p>
+        </div>
+        <div class="lesson" id="ch03-s2">
+          <h3>Subcapitol: Quota si FSRM</h3>
+          <div class="grid-two"><div class="block"><h4>Pasi</h4><ol><li>Instaleaza FS-Resource-Manager.</li><li>Defineste quota templates.</li><li>Aplica quota pe foldere tinta.</li></ol></div><div class="block"><h4>Verificare</h4><ul><li>Userul nu depaseste limita.</li><li>Notificarile quota sunt trimise.</li></ul></div></div>
           <pre><code>Install-WindowsFeature FS-FileServer,FS-Resource-Manager -IncludeManagementTools
 New-Item -Path C:\Shares\Finance -ItemType Directory
 New-SmbShare -Name "Finance$" -Path C:\Shares\Finance -FullAccess "Domain Admins"
 icacls C:\Shares\Finance /grant "ACADEMY\GG-Finance-RW:(OI)(CI)M"</code></pre>
-        </article>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="group policy gpo roaming profile login script">
-          <h3>L5. User Environment și Group Policy</h3>
-          <p class="ro">Teorie: GPO standardizează configurațiile pe user/computer. Home folders, scripturi și policy processing trebuie proiectate curat.</p>
-          <p class="en">Theory: GPO standardizes user/computer configuration. Home folders, scripts, and policy processing must be cleanly designed.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Creează GPO baseline.</li><li>Link pe OU corect.</li><li>Rulează gpupdate/gpresult.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Setările apar pe client.</li><li>Policy precedence e corectă.</li></ul></div></div>
+      <section id="ch04" class="card searchable" data-search="04 gebruikersomgeving gpo roaming profiles login scripts">
+        <h2>04 - Gebruikersomgeving</h2>
+        <div class="lesson" id="ch04-s1">
+          <h3>Subcapitol: Profiles, home folders, scripts</h3>
+          <p class="ro">Teorie: user environment trebuie standardizat pentru predictibilitate operationala. Home folders centralizeaza datele, profilele roaming transfera configurari user, iar logon scripts automatizeaza mapari si setari repetitive.</p>
+          <p class="en">Theory: user environment must be standardized for operational predictability. Home folders centralize data, roaming profiles carry user settings, and logon scripts automate repetitive mappings and settings.</p>
+        </div>
+        <div class="lesson" id="ch04-s2">
+          <h3>Subcapitol: Group Policy Management</h3>
           <pre><code>New-GPO -Name "Baseline-Users"
 New-GPLink -Name "Baseline-Users" -Target "OU=Users,DC=academy,DC=local"
 gpupdate /force
 gpresult /r</code></pre>
-        </article>
+          <p class="ro">Verificare: politicile apar in gpresult si efectul este vizibil pe client.</p>
+          <p class="en">Validation: policies are visible in gpresult and effects are present on clients.</p>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="print management printer deployment">
-          <h3>L6. Print Management</h3>
-          <p class="ro">Teorie: Print server central simplifică administrarea, drepturile și deployment-ul imprimantelor către grupuri țintă.</p>
-          <p class="en">Theory: A central print server simplifies administration, permissions, and printer deployment to target groups.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Instalează Print Server.</li><li>Adaugă port și imprimantă.</li><li>Testează job-uri din client.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Imprimanta apare pe client.</li><li>Job-urile se finalizează corect.</li></ul></div></div>
+      <section id="ch05" class="card searchable" data-search="05 printerbeheer print management deployment">
+        <h2>05 - Printerbeheer</h2>
+        <div class="lesson">
+          <p class="ro">Teorie: print management centralizat reduce costul operational si simplifica suportul. Definesti queue-uri, drivere validate, drepturi pe printer si deployment pe grupuri de utilizatori.</p>
+          <p class="en">Theory: centralized print management reduces operational cost and simplifies support. Define queues, validated drivers, printer permissions, and group-based deployment.</p>
           <pre><code>Install-WindowsFeature Print-Server -IncludeManagementTools
 Add-PrinterPort -Name "IP_192.168.10.50" -PrinterHostAddress "192.168.10.50"
 Add-Printer -Name "Office-Printer" -DriverName "Microsoft IPP Class Driver" -PortName "IP_192.168.10.50"
 Get-Printer</code></pre>
-        </article>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="server management remote desktop event viewer">
-          <h3>L7. Server Management și monitorizare</h3>
-          <p class="ro">Teorie: Administrarea zilnică include RDP controlat, servicii, procese și audit în Event Viewer pentru incidente.</p>
-          <p class="en">Theory: Daily administration includes controlled RDP, service/process monitoring, and Event Viewer auditing for incidents.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Activează RDP sigur.</li><li>Monitorizează servicii critice.</li><li>Filtrează event logs relevante.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Acces remote funcțional.</li><li>Evenimentele critice sunt vizibile.</li></ul></div></div>
+      <section id="ch06" class="card searchable" data-search="06 serverbeheer rdp event viewer mmc">
+        <h2>06 - Serverbeheer</h2>
+        <div class="lesson">
+          <p class="ro">Teorie: server management inseamna operare zilnica controlata: acces remote, monitorizare servicii/procese, audit in logs si reactii rapide la evenimente critice.</p>
+          <p class="en">Theory: server management means controlled daily operations: remote access, service/process monitoring, log auditing, and fast response to critical events.</p>
           <pre><code>Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Get-Service | Where-Object {$_.Status -eq "Running"}
-Get-WinEvent -LogName System -MaxEvents 25</code></pre>
-        </article>
+Get-WinEvent -LogName System -MaxEvents 30</code></pre>
+        </div>
+      </section>
 
-        <article class="step card searchable" data-search="disk management partition format volume">
-          <h3>L8. Disk Management</h3>
-          <p class="ro">Teorie: Administrarea stocării include inițializare, partiționare, formatare și validare periodică a volumelor.</p>
-          <p class="en">Theory: Storage administration includes initialization, partitioning, formatting, and periodic volume validation.</p>
-          <div class="lesson-meta"><div class="meta-block"><h4>Pași / Steps</h4><ol><li>Identifică discurile noi.</li><li>Initializează și creează volum.</li><li>Formatează și etichetează.</li></ol></div><div class="meta-block"><h4>Verificare / Validation</h4><ul><li>Volumul e online.</li><li>Spațiul este raportat corect.</li></ul></div></div>
+      <section id="ch07" class="card searchable" data-search="07 disk management partitions volumes">
+        <h2>07 - Disk Management</h2>
+        <div class="lesson">
+          <p class="ro">Teorie: storage management corect previne downtime. Fluxul standard este detectare disk -> initialize -> partitionare -> formatare -> validare.</p>
+          <p class="en">Theory: proper storage management prevents downtime. Standard flow is disk detection -> initialization -> partitioning -> formatting -> validation.</p>
           <pre><code>Get-Disk
 Initialize-Disk -Number 1 -PartitionStyle GPT
 New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter F
-Format-Volume -DriveLetter F -FileSystem NTFS -NewFileSystemLabel "DATA"</code></pre>
-        </article>
+Format-Volume -DriveLetter F -FileSystem NTFS -NewFileSystemLabel "DATA"
+Get-Volume</code></pre>
+        </div>
+      </section>
 
-        <div class="flow-controls">
-          <button class="prev-step">Previous</button>
-          <button class="next-step">Next</button>
+      <section id="router" class="card searchable" data-search="virtualbox windows server router lab">
+        <h2>Virtualbox Windows Server Router</h2>
+        <div class="lesson">
+          <p class="ro">Teorie: acest scenariu de laborator simuleaza conectivitatea internet + LAN intern cu 2 adaptoare de retea. Este util pentru medii de invatare unde NAT standard nu functioneaza predictibil.</p>
+          <p class="en">Theory: this lab scenario simulates internet + internal LAN connectivity using 2 network adapters. It is useful for training environments where standard NAT is not predictable.</p>
+          <div class="grid-two"><div class="block"><h4>Pasi</h4><ol><li>Configureaza NIC1 pentru internet.</li><li>Configureaza NIC2 pentru LAN intern.</li><li>Seteaza IP static si DNS pentru domeniu.</li></ol></div><div class="block"><h4>Verificare</h4><ul><li>Clientii ating DC-ul.</li><li>DNS intern raspunde.</li></ul></div></div>
+          <pre><code>Get-NetIPConfiguration
+New-NetIPAddress -InterfaceAlias "Ethernet 2" -IPAddress 10.10.10.1 -PrefixLength 24
+Test-NetConnection SRV-DC01 -Port 53</code></pre>
         </div>
       </section>
     </main>
