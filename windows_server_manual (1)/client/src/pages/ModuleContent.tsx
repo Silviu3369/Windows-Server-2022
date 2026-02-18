@@ -14,6 +14,7 @@ import {
 import Layout from "@/components/Layout";
 import allModulesData from "@/lib/allModulesData.json";
 import { moduleReferences, moduleVideos } from "@/lib/moduleEnhancements";
+import { modulePdfCoverage } from "@/lib/pdfTopicCoverage";
 
 interface Module {
   id: string;
@@ -97,6 +98,7 @@ export default function ModuleContent() {
 
   const videos = moduleId ? moduleVideos[moduleId] || [] : [];
   const refs = moduleId ? moduleReferences[moduleId] : undefined;
+  const pdfCoverage = moduleId ? modulePdfCoverage[moduleId] || [] : [];
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => (prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]));
@@ -304,6 +306,22 @@ export default function ModuleContent() {
           ) : (
             <p className="text-sm text-amber-700 font-medium">VIDEO_LINK_NEEDED</p>
           )}
+        </Section>
+
+        <Section
+          title={`PDF Coverage (${pdfCoverage.length} mapped topics)`}
+          icon={<BookOpen className="w-5 h-5 text-blue-700" />}
+          open={expandedSections.includes("pdf-coverage")}
+          onToggle={() => toggleSection("pdf-coverage")}
+        >
+          <div className="space-y-3">
+            {pdfCoverage.map((item, idx) => (
+              <div key={`${item.pdf}-${idx}`} className="rounded border border-slate-200 p-2 bg-slate-50">
+                <p className="text-xs text-slate-500">{item.pdf}</p>
+                <p className="text-sm text-slate-800">{item.topic}</p>
+              </div>
+            ))}
+          </div>
         </Section>
 
         <Section

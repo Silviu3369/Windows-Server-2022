@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import allModulesData from "@/lib/allModulesData.json";
+import { pdfTopicCountByModule } from "@/lib/pdfTopicCoverage";
 
 interface Module {
   id: string;
@@ -36,6 +37,9 @@ export default function LearningPath() {
                   <h2 className="text-lg font-semibold">
                     {module.id} - {module.title}
                   </h2>
+                  <p className="text-xs text-slate-500">
+                    PDF topics mapped from cursus: {pdfTopicCountByModule[module.id] || 0}
+                  </p>
                   <ul className="text-sm text-muted-foreground list-disc list-inside">
                     {module.objectives.slice(0, 3).map((objective, idx) => (
                       <li key={idx}>{objective}</li>

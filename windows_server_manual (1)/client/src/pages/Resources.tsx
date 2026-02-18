@@ -15,6 +15,24 @@ interface Resource {
 
 const resources: Resource[] = [
   {
+    id: 'pdf-index-complete',
+    title: 'PDF Index (Complete)',
+    description: 'Complete extracted headings and keywords from every PDF in cursus',
+    type: 'document',
+    url: '/content/pdf_index_complete.md',
+    size: '24 KB',
+    downloadable: true
+  },
+  {
+    id: 'pdf-coverage-complete',
+    title: 'PDF Coverage Matrix (Complete)',
+    description: 'Topic-to-module mapping for all extracted PDF topics',
+    type: 'document',
+    url: '/content/pdf_coverage_complete.md',
+    size: '56 KB',
+    downloadable: true
+  },
+  {
     id: 'phase-1-audit',
     title: 'Phase 1: Complete Audit Report',
     description: 'Comprehensive audit identifying all gaps in the manual with status and priorities',
@@ -57,19 +75,19 @@ const referenceLinks = [
     title: 'Microsoft Learn',
     description: 'Official Microsoft training and documentation',
     url: 'https://learn.microsoft.com/en-us/windows-server/',
-    icon: '📚'
+    icon: 'MS'
   },
   {
     title: 'Microsoft Docs',
     description: 'Comprehensive technical documentation',
     url: 'https://docs.microsoft.com/en-us/windows-server/',
-    icon: '📖'
+    icon: 'DOC'
   },
   {
     title: 'TechNet',
     description: 'Technical community and resources',
     url: 'https://technet.microsoft.com/',
-    icon: '🔧'
+    icon: 'LAB'
   }
 ];
 
