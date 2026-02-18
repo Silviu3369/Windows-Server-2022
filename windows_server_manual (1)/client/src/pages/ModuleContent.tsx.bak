@@ -1,0 +1,1855 @@
+import { useRoute, useLocation } from "wouter";
+import Layout from "@/components/Layout";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowLeft, ChevronDown, ChevronUp, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import Markdown from "markdown-to-jsx";
+
+interface ModuleSection {
+  title: string;
+  description: string;
+}
+
+const moduleContents: Record<string, { title: string; content: string; sections: ModuleSection[] }> = {
+  "module-1": {
+    title: "Module 1: Fundamente și Setup",
+    sections: [
+      { title: "Introducere", description: "Prezentare generală a Windows Server 2022, cerințe hardware, și pregătire mediu virtual" },
+      { title: "Pregătirea Mediului Virtual", description: "Configurare Hyper-V/VirtualBox/VMware, alocare resurse (CPU, RAM, Disk), și setup rețea" },
+      { title: "Instalarea Windows Server 2022", description: "Pași detaliați de instalare cu Desktop Experience, selectare limbă, și configurare inițială" },
+      { title: "Configurarea Inițială", description: "Setare nume server, configurare rețea, instalare roluri inițiale, și verificare conectivitate" }
+    ],
+    content: `# Module 1: Fundamente și Setup
+
+## Obiective de Învățare
+- ✓ Pregătirea mediului virtual cu resurse adecvate
+- ✓ Instalarea Windows Server 2022 cu Desktop Experience
+- ✓ Configurarea inițială post-instalare
+- ✓ Setarea numelui serverului și conectivității de rețea
+- ✓ Instalarea rolurilor și caracteristicilor inițiale
+
+---
+
+## Cerințe Hardware Minime
+
+| Componenta | Minim | Recomandat |
+|-----------|-------|-----------|
+| CPU | 1.4 GHz 64-bit | 2.0 GHz+ multi-core |
+| RAM | 512 MB (Core) / 2 GB (Desktop) | 4-8 GB |
+| Disk | 32 GB | 60 GB+ SSD |
+| Rețea | 1 adaptor | 2 adaptoare |
+
+---
+
+## Pași de Instalare - Windows Server 2022
+
+### Pasul 1: Pornirea VM-ului și Selectarea Limbii
+
+1. Porniți mașina virtuală
+2. Selectați limba: **Română**
+3. Selectați formatul orei: **24-hour**
+4. Selectați aspectul tastaturii: **Romanian (Standard)**
+5. Faceți clic pe **Next**
+
+### Pasul 2: Instalarea Windows Server
+
+1. Faceți clic pe **"Install now"**
+2. Selectați: **"Windows Server 2022 Standard (Desktop Experience)"**
+3. Acceptați termenii de licență
+4. Selectați: **"Custom: Install Windows only (advanced)"**
+5. Alegeți discul virtual și faceți clic **Next**
+6. Așteptați finalizarea instalării (10-20 minute)
+
+### Pasul 3: Setarea Parolei Administrator
+
+1. După restart, setați parola Administrator
+2. Cerințe parolă:
+   - Minim 8 caractere
+   - Majuscule: A-Z
+   - Minuscule: a-z
+   - Cifre: 0-9
+   - Caractere speciale: !@#$%
+
+**Exemplu:** \`P@ssw0rd2024!\`
+
+---
+
+## Configurarea Inițială prin Server Manager
+
+### Pasul 1: Schimbarea Numelui Serverului
+
+\`\`\`
+1. Deschideți Server Manager (apare automat)
+2. Faceți clic pe "Local Server"
+3. Faceți clic pe numele computerului (ex: "WIN-ABC123")
+4. Faceți clic pe "Change"
+5. Introduceți noul nume: WS2022-DC01
+6. Faceți clic OK și restartați
+\`\`\`
+
+### Pasul 2: Configurarea Rețelei
+
+\`\`\`
+1. Deschideți Network Settings
+2. Faceți clic dreapta pe adaptor → Properties
+3. Selectați "Internet Protocol Version 4 (TCP/IPv4)"
+4. Faceți clic Properties
+5. Configurați:
+   - IP Address: 192.168.1.10
+   - Subnet Mask: 255.255.255.0
+   - Default Gateway: 192.168.1.1
+   - DNS Server: 8.8.8.8
+6. Faceți clic OK
+\`\`\`
+
+### Pasul 3: Instalarea Rolurilor Inițiale
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "Role-based or feature-based installation"
+4. Selectați serverul din pool
+5. Selectați rolurile:
+   ☐ Active Directory Domain Services
+   ☐ DNS Server
+   ☐ DHCP Server
+6. Completați instalarea
+\`\`\`
+
+---
+
+## Scheme și Diagrame - Topologie VM
+
+\`\`\`
+┌─────────────────────────────────────────┐
+│   Windows Server 2022 VM                │
+│   (Hyper-V / VirtualBox / VMware)       │
+├─────────────────────────────────────────┤
+│                                         │
+│  ┌──────────────┐  ┌──────────────┐   │
+│  │ NIC 1 (WAN)  │  │ NIC 2 (LAN)  │   │
+│  │ Bridge/NAT   │  │ Internal Net │   │
+│  │ 192.168.1.10 │  │ 192.168.1.10 │   │
+│  └──────┬───────┘  └──────┬───────┘   │
+│         │                 │           │
+│         ▼                 ▼           │
+│    Internet          Clienți (W11)    │
+│                                         │
+└─────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## Verificare Post-Instalare
+
+Completați checklist-ul:
+
+- [ ] Windows Server 2022 instalat cu Desktop Experience
+- [ ] Nume server setat corect: **WS2022-DC01**
+- [ ] Ambele adaptoare de rețea configurate
+- [ ] IP static setat: **192.168.1.10**
+- [ ] Server Manager accesibil
+- [ ] Conexiune la internet verificată
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Verificare versiune Windows Server
+Get-WindowsEdition
+
+# Verificare adaptoare de rețea
+Get-NetAdapter
+
+# Verificare IP configuration
+Get-NetIPConfiguration
+
+# Restart server
+Restart-Computer -Force
+
+# Verificare nume computer
+$env:COMPUTERNAME
+\`\`\`
+`
+  },
+  "module-2": {
+    title: "Module 2: Administrare și Networking",
+    sections: [
+      { title: "Administrare: GUI vs CMD vs PowerShell", description: "Comparație trei metode de administrare, avantaje/dezavantaje, și când să folosești fiecare" },
+      { title: "Networking: Router (NAT)", description: "Configurare server ca router, NAT setup, topologie rețea, și testare conectivitate" },
+      { title: "Servicii Enterprise: AD DS, DNS, DHCP", description: "Introducere servicii enterprise, roluri, și integrare în infrastructură" }
+    ],
+    content: `# Module 2: Administrare și Networking
+
+## Trei Metode de Administrare
+
+### 1️⃣ GUI (Server Manager)
+
+**Avantaje:**
+- ✓ Interfață vizuală ușor de înțeles
+- ✓ Ideal pentru administratori începători
+- ✓ Feedback vizual imediat
+
+**Dezavantaje:**
+- ✗ Lent pentru sarcini repetitive
+- ✗ Greu de automatizat
+
+**Când să folosești:** Configurări inițiale, instalare roluri
+
+---
+
+### 2️⃣ Command Prompt (CMD)
+
+**Avantaje:**
+- ✓ Rapid pentru sarcini simple
+- ✓ Ușor de scripting
+- ✓ Disponibil pe orice sistem Windows
+
+**Dezavantaje:**
+- ✗ Sintaxă mai complexă
+- ✗ Greu pentru sarcini avansate
+
+**Exemplu:**
+\`\`\`cmd
+ipconfig /all
+ping 192.168.1.1
+nslookup company.local
+\`\`\`
+
+---
+
+### 3️⃣ PowerShell (Recomandat)
+
+**Avantaje:**
+- ✓ Cea mai puternică metodă
+- ✓ Scripting avansat și automatizare
+- ✓ Acces la .NET Framework
+- ✓ Ideal pentru administratori experimentați
+
+**Dezavantaje:**
+- ✗ Curba de învățare mai abruptă
+- ✗ Necesită înțelegere a conceptelor avansate
+
+**Exemplu:**
+\`\`\`powershell
+Get-NetAdapter
+Get-ADUser -Filter *
+New-ADUser -Name "John Smith"
+\`\`\`
+
+---
+
+## Configurarea Serverului ca Router (NAT)
+
+### Pași de Configurare
+
+#### Pasul 1: Instalarea Rolului Routing and Remote Access
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "Remote Access"
+4. Selectați "Routing"
+5. Completați instalarea
+6. Restartați serverul
+\`\`\`
+
+#### Pasul 2: Configurarea NAT
+
+\`\`\`
+1. Deschideți Routing and Remote Access
+2. Faceți clic dreapta pe server
+3. Selectați "Configure and Enable Routing and Remote Access"
+4. Selectați "Network Address Translation (NAT)"
+5. Selectați adaptorul WAN (conectat la internet)
+6. Finalizați configurarea
+\`\`\`
+
+#### Pasul 3: Verificare Conectivitate
+
+\`\`\`powershell
+# Testați ping către internet
+ping 8.8.8.8
+
+# Testați DNS
+nslookup google.com
+
+# Verificare rute
+route print
+\`\`\`
+
+---
+
+## Topologie Rețea Enterprise
+
+\`\`\`
+┌──────────────────────────────────────────┐
+│         Internet (8.8.8.8)               │
+└────────────────┬─────────────────────────┘
+                 │
+         ┌───────▼────────────┐
+         │  Windows Server    │
+         │  2022 (Router NAT) │
+         │  192.168.1.10      │
+         └───────┬────────────┘
+                 │
+    ┌────────────┼────────────┐
+    │            │            │
+┌───▼──┐    ┌───▼──┐    ┌───▼──┐
+│Client│    │Client│    │Client│
+│W11   │    │W11   │    │W11   │
+│50    │    │51    │    │52    │
+└──────┘    └──────┘    └──────┘
+\`\`\`
+
+---
+
+## Servicii Enterprise
+
+### Active Directory Domain Services (AD DS)
+- 🔐 Gestionare centralizată a utilizatorilor și computerelor
+- 📊 Bază de date ierarhică
+- 📋 Suport pentru politici de grup
+
+### DNS (Domain Name System)
+- 🌐 Rezoluția numelor de domeniu
+- 🔗 Mapare nume → adrese IP
+- 🔄 Suport pentru DNS dinamic
+
+### DHCP (Dynamic Host Configuration Protocol)
+- 📡 Alocarea automată de adrese IP
+- ⚙️ Configurare automată a clienților
+- 📊 Gestionare centralizată a adreselor
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Verificare adaptoare de rețea
+Get-NetAdapter
+
+# Configurare IP static
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.1.10 -PrefixLength 24 -DefaultGateway 192.168.1.1
+
+# Configurare DNS
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 8.8.8.8, 8.8.4.4
+
+# Testare conectivitate
+Test-NetConnection -ComputerName 8.8.8.8 -Port 53
+
+# Verificare rute
+Get-NetRoute
+\`\`\`
+`
+  },
+  "module-3": {
+    title: "Module 3: Active Directory - Fundamente",
+    sections: [
+      { title: "Structura Active Directory", description: "Ierarhie Forest/Tree/Domain, OU-uri, și organizare logică a resurselor" },
+      { title: "Grupuri: Locale, Globale, Domeniu Local", description: "Tipuri de grupuri, diferențe, și cazuri de utilizare pentru fiecare tip" },
+      { title: "Gestionarea Utilizatorilor", description: "Creație utilizatori, resetare parolă, proprietăți, și integrare în grupuri" },
+      { title: "Active Directory Users and Computers (ADUC)", description: "Interfață GUI ADUC, navigare, și operații comune de gestionare" }
+    ],
+    content: `# Module 3: Active Directory - Fundamente
+
+## Structura Active Directory Ierarhică
+
+\`\`\`
+Forest: company.com
+│
+├─ Tree: company.com
+│  │
+│  ├─ Domain: company.com
+│  │  │
+│  │  ├─ OU: Users
+│  │  │  ├─ User: John Smith (CN=jsmith)
+│  │  │  ├─ User: Jane Doe (CN=jdoe)
+│  │  │  └─ Group: Sales Team
+│  │  │
+│  │  ├─ OU: Computers
+│  │  │  ├─ Computer: PC-001
+│  │  │  └─ Computer: PC-002
+│  │  │
+│  │  └─ OU: Servers
+│  │     └─ Computer: SERVER-01
+│  │
+│  └─ Domain: branch.company.com
+│
+└─ Tree: subsidiary.com
+\`\`\`
+
+---
+
+## Pași de Instalare - Active Directory Domain Services
+
+### Pasul 1: Instalarea AD DS
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "Active Directory Domain Services"
+4. Faceți clic "Next" și completați instalarea
+5. Restartați serverul
+\`\`\`
+
+### Pasul 2: Promovarea Serverului la Domain Controller
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe flag-ul cu notificare (⚠️)
+3. Selectați "Promote this server to a domain controller"
+4. Selectați "Add a new forest"
+5. Introduceți Root Domain Name: company.local
+6. Setați parola DSRM: P@ssw0rd2024!
+7. Completați promovarea
+8. Restartați serverul
+\`\`\`
+
+### Pasul 3: Crearea Organizational Units (OU)
+
+\`\`\`
+1. Deschideți Active Directory Users and Computers
+2. Faceți clic dreapta pe domeniu (company.local)
+3. Selectați "New" → "Organizational Unit"
+4. Introduceți nume: Users
+5. Repetați pentru: Computers, Servers
+\`\`\`
+
+---
+
+## Tipuri de Grupuri
+
+### 1. Local Group
+- 📍 Doar pe computerul local
+- 🔒 Folosit pentru permisiuni locale
+- ❌ Nu poate conține utilizatori din alte domenii
+
+### 2. Global Group
+- 🌍 La nivel de domeniu
+- ✓ Poate conține utilizatori și computere din domeniu
+- 📋 Folosit pentru organizare și permisiuni
+
+### 3. Domain Local Group
+- 🔐 La nivel de domeniu
+- 🎯 Folosit pentru permisiuni la resurse
+- 🔗 Poate conține utilizatori din orice domeniu
+
+---
+
+## Pași de Creație - Utilizatori
+
+### Crearea unui Utilizator
+
+\`\`\`
+1. Deschideți Active Directory Users and Computers
+2. Navigați la OU Users
+3. Faceți clic dreapta → "New" → "User"
+4. Introduceți:
+   - First Name: John
+   - Last Name: Smith
+   - User logon name: jsmith
+5. Faceți clic "Next"
+6. Setați parola: P@ssw0rd2024!
+7. Selectați "Password never expires" (opțional)
+8. Faceți clic "Next" și "Finish"
+\`\`\`
+
+### Crearea unui Grup
+
+\`\`\`
+1. Deschideți Active Directory Users and Computers
+2. Navigați la OU Users
+3. Faceți clic dreapta → "New" → "Group"
+4. Introduceți Group name: Sales Team
+5. Selectați "Global" și "Security"
+6. Faceți clic "OK"
+\`\`\`
+
+### Adăugarea Utilizatorilor în Grup
+
+\`\`\`
+1. Deschideți grupul "Sales Team"
+2. Faceți clic pe tab "Members"
+3. Faceți clic pe "Add"
+4. Introduceți nume utilizatori: jsmith; jdoe
+5. Faceți clic "Check Names"
+6. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Creare utilizator
+New-ADUser -Name "John Smith" -SamAccountName "jsmith" -UserPrincipalName "jsmith@company.local" -Path "OU=Users,DC=company,DC=local" -AccountPassword (ConvertTo-SecureString "P@ssw0rd2024!" -AsPlainText -Force) -Enabled $true
+
+# Creare grup
+New-ADGroup -Name "Sales Team" -SamAccountName "sales" -GroupCategory Security -GroupScope Global -Path "OU=Users,DC=company,DC=local"
+
+# Adăugare utilizator în grup
+Add-ADGroupMember -Identity "Sales Team" -Members "jsmith"
+
+# Listare utilizatori
+Get-ADUser -Filter * -SearchBase "OU=Users,DC=company,DC=local"
+
+# Resetare parolă
+Set-ADAccountPassword -Identity "jsmith" -NewPassword (ConvertTo-SecureString "NewP@ssw0rd!" -AsPlainText -Force)
+\`\`\`
+
+---
+
+## Verificare Post-Configurare
+
+- [ ] AD DS instalat și promovat
+- [ ] Domain Controller funcțional
+- [ ] OU-uri create (Users, Computers, Servers)
+- [ ] Utilizatori creați și testați
+- [ ] Grupuri create și populați
+- [ ] Clienți conectați la domeniu
+`
+  },
+  "module-4": {
+    title: "Module 4: Permisiuni și File Server",
+    sections: [
+      { title: "Permisiuni NTFS și Share", description: "Diferență NTFS vs Share, reguli efective, și combinații de permisiuni" },
+      { title: "File Server: Configurare și Best Practices", description: "Setup file server, creație partajări, setare permisiuni, și best practices" },
+      { title: "NTFS Avansat: Permisiuni Moleculare și Moștenire", description: "Permisiuni granulare, moștenire, blocarea moștenirii, și troubleshooting" },
+      { title: "Distributed File System (DFS)", description: "Setup DFS, replicare, namespace, și failover transparent" }
+    ],
+    content: `# Module 4: Permisiuni și File Server
+
+## Permisiuni NTFS vs Share
+
+### Permisiuni NTFS (Local)
+- 🔒 Controlează accesul la nivel de fișier/folder
+- 💾 Funcționează și offline
+- 📋 Permisiuni: Read, Modify, Full Control
+
+### Permisiuni Share (Rețea)
+- 🌐 Controlează accesul prin rețea
+- 🔗 Doar pentru resurse partajate
+- 📋 Permisiuni: Read, Change, Full Control
+
+### Regula Efectivă
+**⚠️ Permisiunea efectivă = Cea mai restrictivă dintre NTFS și Share**
+
+| Permisiune NTFS | Permisiune Share | Rezultat |
+|-----------------|-----------------|----------|
+| Full Control | Read | **Read** ❌ |
+| Modify | Change | **Modify** ✓ |
+| Read | Full Control | **Read** ❌ |
+
+---
+
+## Pași de Instalare - File Server
+
+### Pasul 1: Instalarea Rolului File Server
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "File and Storage Services"
+4. Selectați "File Server"
+5. Completați instalarea
+6. Restartați serverul
+\`\`\`
+
+### Pasul 2: Crearea unei Partajări de Fișiere
+
+#### 2.1 Crearea Folderului
+\`\`\`
+C:\\FileShare\\Documents
+\`\`\`
+
+#### 2.2 Setarea Permisiunilor NTFS
+\`\`\`
+1. Faceți clic dreapta pe folder → Properties
+2. Tab "Security" → "Edit"
+3. Faceți clic "Add"
+4. Introduceți: DOMAIN\\Domain Users
+5. Selectați permisiuni: Modify
+6. Faceți clic "Apply" și "OK"
+\`\`\`
+
+#### 2.3 Crearea Partajării
+\`\`\`
+1. Faceți clic dreapta pe folder → Properties
+2. Tab "Sharing" → "Advanced Sharing"
+3. Bifați "Share this folder"
+4. Introduceți share name: Documents
+5. Faceți clic "Permissions"
+6. Adăugați: DOMAIN\\Domain Users
+7. Selectați: Change
+8. Faceți clic "Apply" și "OK"
+\`\`\`
+
+---
+
+## Structura File Server
+
+\`\`\`
+File Server (192.168.1.20)
+│
+├─ Share: Documents
+│  ├─ Permisiuni NTFS: Domain Users (Modify)
+│  ├─ Permisiuni Share: Domain Users (Change)
+│  └─ Shadow Copies: Enabled (Daily)
+│
+├─ Share: Software
+│  ├─ Permisiuni NTFS: IT Team (Full Control)
+│  ├─ Permisiuni Share: Domain Users (Read)
+│  └─ Shadow Copies: Enabled
+│
+└─ Share: Backups
+   ├─ Permisiuni NTFS: Backup Operators (Full Control)
+   ├─ Permisiuni Share: Nobody (Restricted)
+   └─ Shadow Copies: Disabled
+\`\`\`
+
+---
+
+## Moștenire Permisiuni
+
+### Moștenire Activă (Default)
+- ✓ Folderele copil moștenesc permisiuni de la parent
+- ✓ Modificări la parent se aplică automat la copii
+- ✓ Ușor de gestionat la scară largă
+
+### Blocarea Moștenirii
+\`\`\`
+1. Faceți clic dreapta pe folder → Properties
+2. Tab "Security" → "Advanced"
+3. Bifați "Disable inheritance"
+4. Selectați "Convert inherited permissions to explicit permissions"
+5. Faceți clic "Apply" și "OK"
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Creare partajare
+New-SmbShare -Name "Documents" -Path "C:\\FileShare\\Documents" -FullAccess "DOMAIN\\Domain Users"
+
+# Setare permisiuni NTFS
+icacls "C:\\FileShare\\Documents" /grant "DOMAIN\\Domain Users:(OI)(CI)M"
+
+# Listare partajări
+Get-SmbShare
+
+# Verificare permisiuni
+Get-Acl "C:\\FileShare\\Documents"
+
+# Creare folder cu permisiuni
+New-Item -Path "C:\\FileShare\\Documents" -ItemType Directory
+icacls "C:\\FileShare\\Documents" /grant "DOMAIN\\Domain Users:(OI)(CI)M"
+\`\`\`
+`
+  },
+  "module-5": {
+    title: "Module 5: Print Server și Profiluri Utilizator",
+    sections: [
+      { title: "Print Server: Configurare și Management", description: "Setup print server, adăugare imprimante, partajare, și print pooling" },
+      { title: "Home Directories și Roaming Profiles", description: "Configurare home directories, roaming profiles, și sincronizare date" },
+      { title: "Logon Scripts: BAT, VBScript, PowerShell", description: "Creare scripturi logon, automatizare sarcini, și best practices" },
+      { title: "Folder Redirection via Group Policy", description: "Configurare folder redirection, sincronizare offline, și troubleshooting" },
+      { title: "Shadow Copies: Recuperare Versiuni Anterioare", description: "Setup shadow copies, recuperare fișiere, și configurare retenție" }
+    ],
+    content: `# Module 5: Print Server și Profiluri Utilizator
+
+## Pași de Instalare - Print Server
+
+### Pasul 1: Instalarea Rolului Print Server
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "Print and Document Services"
+4. Selectați "Print Server"
+5. Completați instalarea
+6. Restartați serverul
+\`\`\`
+
+### Pasul 2: Adăugarea unei Imprimante de Rețea
+
+#### Metoda 1: Prin GUI (Print Management)
+\`\`\`
+1. Deschideți Print Management
+2. Faceți clic pe "Add Printer"
+3. Selectați "Add a network printer by IP address"
+4. Introduceți IP imprimantei: 192.168.1.100
+5. Finalizați adăugarea
+\`\`\`
+
+#### Metoda 2: Prin PowerShell
+\`\`\`powershell
+Add-PrinterPort -Name "IP_192.168.1.100" -PrinterHostAddress "192.168.1.100"
+Add-Printer -Name "HP LaserJet" -PortName "IP_192.168.1.100" -DriverName "HP LaserJet Pro"
+\`\`\`
+
+### Pasul 3: Partajarea Imprimantei
+
+\`\`\`
+1. Deschideți Print Management
+2. Faceți clic dreapta pe imprimantă
+3. Selectați "Properties"
+4. Tab "Sharing" → Bifați "Share this printer"
+5. Introduceți share name: HP_LaserJet
+6. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Print Pooling
+
+### Beneficii
+- ✓ Distribuire automată a joburilor
+- ✓ Failover transparent
+- ✓ Utilizare mai eficientă a resurselor
+
+### Configurare Print Pool
+\`\`\`
+1. Deschideți Print Management
+2. Creați o nouă imprimantă logică
+3. Adăugați mai multe porturi fizice (3-4 imprimante)
+4. Utilizatorii tipăresc pe o singură coadă
+5. Joburile se distribuie automat
+\`\`\`
+
+---
+
+## Home Directories
+
+### Beneficii
+- 👤 Fiecare utilizator are folder personal
+- 💾 Backup centralizat
+- 🔄 Sincronizare între dispozitive
+
+### Configurare Home Directory
+
+#### Pasul 1: Crearea Folderului Share
+\`\`\`
+C:\\HomeDirectories\\Users
+\`\`\`
+
+#### Pasul 2: Setarea Permisiunilor
+\`\`\`
+1. Faceți clic dreapta → Properties → Security
+2. Adăugați "CREATOR OWNER" cu Full Control
+3. Adăugați "Domain Users" cu Modify
+4. Aplicați permisiuni
+\`\`\`
+
+#### Pasul 3: Atribuire în Active Directory
+\`\`\`
+1. Deschideți Active Directory Users and Computers
+2. Faceți clic dreapta pe utilizator → Properties
+3. Tab "Profile" → "Home folder"
+4. Selectați "Connect" și introduceți: \\\\SERVER\\Users\\%username%
+5. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Roaming Profiles
+
+### Beneficii
+- 👥 Utilizatorul se conectează pe orice computer
+- ⚙️ Aceeași configurare și setări
+- 📁 Desktop și fișiere sincronizate
+
+### Configurare Roaming Profile
+
+\`\`\`
+1. Creați folder: C:\\Profiles\\RoamingProfiles
+2. Deschideți ADUC
+3. Faceți clic dreapta pe utilizator → Properties
+4. Tab "Profile" → "Profile path"
+5. Introduceți: \\\\SERVER\\Profiles\\%username%
+6. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Logon Scripts
+
+### Tipuri de Scripturi
+- 🔧 **BAT** - Command Prompt scripts
+- 📝 **VBScript** - Visual Basic scripts
+- 💻 **PowerShell** - Modern scripting (recomandat)
+
+### Exemplu PowerShell Logon Script
+
+\`\`\`powershell
+# Mount network shares
+net use Z: \\\\SERVER\\Documents
+
+# Set printer
+Add-Printer -ConnectionName "\\\\SERVER\\HP LaserJet"
+
+# Set time zone
+Set-TimeZone -Id "Romance Standard Time"
+
+# Log user logon
+Add-Content -Path "C:\\Logs\\logon.log" -Value "$(Get-Date) - $env:USERNAME logged on"
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Creare home directory
+New-Item -Path "C:\\HomeDirectories\\Users\\jsmith" -ItemType Directory
+
+# Setare permisiuni
+icacls "C:\\HomeDirectories\\Users\\jsmith" /grant "DOMAIN\\jsmith:(OI)(CI)F"
+
+# Creare share
+New-SmbShare -Name "HomeShare" -Path "C:\\HomeDirectories\\Users" -FullAccess "DOMAIN\\Domain Users"
+
+# Atribuire home directory utilizatorului
+Set-ADUser -Identity "jsmith" -HomeDirectory "\\\\SERVER\\Users\\jsmith" -HomeDrive "H:"
+
+# Listare imprimante
+Get-Printer
+\`\`\`
+`
+  },
+  "module-6": {
+    title: "Module 6: Group Policy Objects (GPO)",
+    sections: [
+      { title: "Securitate și Group Policy Objects (GPO)", description: "Introducere GPO, structură, creație, editare, și aplicare politici de securitate" },
+      { title: "Group Policy Advanced: Filtering și WMI", description: "Filtrare GPO cu grupuri, WMI filters, și aplicare selectivă politici" }
+    ],
+    content: `# Module 6: Group Policy Objects (GPO)
+
+## Structura GPO
+
+### Componente GPO
+1. **Computer Configuration** - Setări pentru computere
+2. **User Configuration** - Setări pentru utilizatori
+
+### Locații Politici
+- 🖥️ Local Group Policy (LGPO)
+- 🌍 Domain Group Policy
+- 🏢 Site Group Policy
+- 📁 OU Group Policy
+
+---
+
+## Pași de Creație - GPO
+
+### Pasul 1: Instalarea Group Policy Management
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Add Roles and Features"
+3. Selectați "Remote Server Administration Tools"
+4. Selectați "Group Policy Management Tools"
+5. Completați instalarea
+6. Restartați serverul
+\`\`\`
+
+### Pasul 2: Crearea unei GPO
+
+\`\`\`
+1. Deschideți Group Policy Management
+2. Navigați la domeniu (company.local)
+3. Faceți clic dreapta pe OU (Users)
+4. Selectați "Create a GPO in this domain, and Link it here"
+5. Introduceți nume GPO: Security Policy
+6. Faceți clic "OK"
+\`\`\`
+
+### Pasul 3: Editarea GPO
+
+\`\`\`
+1. Faceți clic dreapta pe GPO
+2. Selectați "Edit"
+3. Navigați la politica dorită
+4. Setați valoarea
+5. Faceți clic "OK" și "Close"
+\`\`\`
+
+---
+
+## Politici de Securitate
+
+### Politică de Parolă
+
+\`\`\`
+1. Deschideți GPO Editor
+2. Navigați la: Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Password Policy
+3. Setați:
+   - Maximum password age: 90 days
+   - Minimum password length: 12 characters
+   - Password must meet complexity requirements: Enabled
+4. Aplicați politica
+\`\`\`
+
+### Politică de Blocare Cont
+
+\`\`\`
+1. Navigați la: Account Policies → Account Lockout Policy
+2. Setați:
+   - Account lockout threshold: 5 invalid logon attempts
+   - Account lockout duration: 30 minutes
+   - Reset account lockout counter after: 30 minutes
+3. Aplicați politica
+\`\`\`
+
+### Politică de Audit
+
+\`\`\`
+1. Navigați la: Audit Policy
+2. Activați:
+   ☑ Audit account logon events
+   ☑ Audit logon events
+   ☑ Audit object access
+   ☑ Audit privilege use
+3. Aplicați politica
+\`\`\`
+
+---
+
+## Structura GPO în Domeniu
+
+\`\`\`
+Domain: company.local
+│
+├─ OU: Users
+│  └─ GPO: User Security Policy
+│     ├─ Password Policy (90 days, 12 chars)
+│     ├─ Audit Policy
+│     └─ Folder Redirection
+│
+├─ OU: Computers
+│  └─ GPO: Computer Security Policy
+│     ├─ Windows Firewall
+│     ├─ Windows Update (Auto-install)
+│     └─ Security Options
+│
+└─ OU: Servers
+   └─ GPO: Server Security Policy
+      ├─ Account Lockout Policy
+      ├─ Audit Policy
+      └─ Security Options
+\`\`\`
+
+---
+
+## Filtrare GPO
+
+### Filtrare cu Grupuri de Securitate
+
+\`\`\`
+1. Deschideți GPO
+2. Faceți clic pe tab "Scope"
+3. Sub "Security Filtering" faceți clic pe "Edit"
+4. Adăugați grupuri de securitate
+5. Setați permisiuni: Apply Group Policy
+\`\`\`
+
+### WMI Filters
+
+\`\`\`
+1. Deschideți Group Policy Management
+2. Faceți clic dreapta pe "WMI Filters"
+3. Selectați "New"
+4. Introduceți nume și descriere
+5. Adăugați query WMI
+6. Salvați
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Creare GPO
+New-GPO -Name "Security Policy"
+
+# Legare GPO la OU
+New-GPLink -Name "Security Policy" -Target "OU=Users,DC=company,DC=local"
+
+# Aplicare GPO pe computer
+gpupdate /force
+
+# Verificare GPO aplicate
+gpresult /h report.html
+
+# Listare GPO-uri
+Get-GPO -All
+\`\`\`
+`
+  },
+  "module-7": {
+    title: "Module 7: Server Management și Monitoring",
+    sections: [
+      { title: "Task Manager: Procese, Performanță, Servicii", description: "Utilizare Task Manager, monitorizare procese, CPU, RAM, și gestionare servicii" },
+      { title: "Event Viewer: Loguri, Custom Views, Subscripții", description: "Deschidere Event Viewer, tipuri loguri, filtrare, și abonamente la evenimente" },
+      { title: "System Monitor: Real-time Monitoring și Alerts", description: "Configurare contori, grafice, data collector sets, și alertare" },
+      { title: "Audit: Configurare și Control", description: "Activare audit logging, tipuri evenimente, și analiză loguri de securitate" },
+      { title: "Remote Desktop: Activare și Configurare", description: "Activare RDS, configurare permisiuni, și conectare remote" }
+    ],
+    content: `# Module 7: Server Management și Monitoring
+
+## Task Manager
+
+### Utilizări
+- 📊 Monitorizare CPU și RAM
+- 🔄 Gestionare procese
+- ⚙️ Gestionare servicii
+- 👥 Monitorizare utilizatori conectați
+
+### Deschidere Task Manager
+- ⌨️ Ctrl + Shift + Esc
+- ⌨️ Ctrl + Alt + Delete → Task Manager
+- 🖱️ Faceți clic dreapta pe taskbar → Task Manager
+
+### Fila Processes
+- Afișează procese active
+- CPU și RAM per proces
+- Terminare procese problematice
+
+### Fila Services
+- Afișează servicii Windows
+- Status: Running/Stopped
+- Pornire/Oprire servicii
+
+---
+
+## Event Viewer
+
+### Tipuri de Loguri
+1. **System Log** - Evenimente sistem
+2. **Security Log** - Evenimente de securitate
+3. **Application Log** - Evenimente aplicații
+4. **Custom Views** - Filtrare personalizată
+
+### Deschidere Event Viewer
+\`\`\`
+1. Deschideți Server Manager
+2. Tools → Event Viewer
+\`\`\`
+
+### Filtrare Loguri
+\`\`\`
+1. Deschideți Event Viewer
+2. Faceți clic dreapta pe log
+3. Selectați "Filter Current Log"
+4. Setați criterii de filtrare
+5. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Performance Monitor
+
+### Contori Importanți
+
+| Contor | Valoare Normală | Alertă |
+|--------|-----------------|--------|
+| Processor % Time | < 80% | > 90% |
+| Memory Available MB | > 20% | < 10% |
+| Disk % Time | < 80% | > 90% |
+| Network Bytes/sec | < 80% | > 90% |
+
+### Crearea unui Contor Personalizat
+
+\`\`\`
+1. Deschideți Performance Monitor
+2. Faceți clic pe "+" pentru adăuga contor
+3. Selectați obiect și contor
+4. Adăugați și "OK"
+\`\`\`
+
+### Data Collector Sets
+
+\`\`\`
+1. Deschideți Performance Monitor
+2. Faceți clic dreapta pe "Data Collector Sets"
+3. Selectați "New" → "Data Collector Set"
+4. Introduceți nume și descriere
+5. Adăugați contori
+6. Setați schedule și locație salvare
+7. Salvați
+\`\`\`
+
+---
+
+## Audit Logging
+
+### Tipuri de Evenimente Audit
+- 👤 Account Logon
+- 👥 Account Management
+- 🔓 Logon Events
+- 📁 Object Access
+- 🔑 Privilege Use
+- 🔄 Process Tracking
+- ⚙️ System Events
+
+### Activare Audit Logging
+
+\`\`\`
+1. Deschideți Group Policy Management
+2. Navigați la: Computer Configuration → Policies → Windows Settings → Security Settings → Audit Policy
+3. Activați politicile dorite
+4. Aplicați și restartați
+\`\`\`
+
+---
+
+## Remote Desktop Services
+
+### Activare Remote Desktop
+
+\`\`\`
+1. Deschideți Server Manager
+2. Faceți clic pe "Local Server"
+3. Sub "Remote Desktop" faceți clic pe "Disabled"
+4. Selectați "Enable Remote Desktop"
+5. Adăugați utilizatori care pot conecta
+6. Faceți clic "OK"
+\`\`\`
+
+### Conectare Remote Desktop
+
+\`\`\`
+- Utilizați: mstsc.exe
+- Introduceți: server-name sau IP-address
+- Introduceți credențiale
+- Conectați
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Verificare servicii
+Get-Service | Where-Object {$_.Status -eq "Running"}
+
+# Restart serviciu
+Restart-Service -Name "Spooler"
+
+# Verificare Event Log
+Get-EventLog -LogName System -Newest 10
+
+# Creare Performance Counter
+New-Object System.Diagnostics.PerformanceCounter("Processor", "% Processor Time", "_Total")
+
+# Activare Remote Desktop
+Set-ItemProperty -Path "HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server" -Name "fDenyTSConnections" -Value 0
+
+# Verificare utilizatori conectați
+quser
+\`\`\`
+`
+  },
+  "module-8": {
+    title: "Module 8: Disk Management și RAID",
+    sections: [
+      { title: "Disk Management Tool: GUI și PowerShell", description: "Deschidere Disk Management, interfață, și operații comune" },
+      { title: "Discuri Fizice: Inițializare și Partiții (MBR vs GPT)", description: "Inițializare discuri, comparație MBR vs GPT, și alegere corectă" },
+      { title: "Basic Disk vs Dynamic Disk", description: "Diferențe, avantaje/dezavantaje, și conversie basic to dynamic" },
+      { title: "Partiții Logice: Criere, Redimensionare, Ștergere", description: "Operații partiții, creație, redimensionare, și ștergere sigură" },
+      { title: "Spanned Volumes și Mounted Stations", description: "Criere spanned volumes, mounted folders, și configurare" },
+      { title: "RAID: Levels 0, 1, 5 și Configurare", description: "Tipuri RAID, beneficii/dezavantaje, și configurare pe Windows Server" },
+      { title: "DiskPart: Command-line Disk Management", description: "Comenzi DiskPart, scripturi, și automatizare operații disk" }
+    ],
+    content: `# Module 8: Disk Management și RAID
+
+## Discuri Fizice - Inițializare
+
+### Deschidere Disk Management
+\`\`\`
+1. Deschideți Server Manager
+2. Tools → Computer Management
+3. Faceți clic pe "Disk Management"
+\`\`\`
+
+### Inițializare Disc
+
+\`\`\`
+1. Faceți clic dreapta pe disc
+2. Selectați "Initialize Disk"
+3. Alegeți MBR sau GPT
+4. Faceți clic "OK"
+\`\`\`
+
+---
+
+## MBR vs GPT
+
+| Caracteristică | MBR | GPT |
+|---|---|---|
+| Maxim partiții | 4 primare | Unlimited |
+| Maxim disc | 2 TB | > 2 TB |
+| Compatibilitate | Sisteme vechi | Sisteme moderne |
+| Redundanță | Nu | Da (backup GPT) |
+| **Când să folosești** | **Discuri mici** | **Discuri mari** |
+
+---
+
+## Basic Disk vs Dynamic Disk
+
+### Basic Disk
+- 📋 Partiții tradiționale
+- ✓ Compatibil cu toate sistemele
+- ❌ Fără opțiuni avansate
+
+### Dynamic Disk
+- 📊 Volumuri simple, spanned, striped
+- 🔄 RAID 0, 1, 5
+- ⚙️ Flexibilitate mai mare
+- ⚠️ Doar Windows Server
+
+### Conversie Basic → Dynamic
+
+\`\`\`
+1. Deschideți Disk Management
+2. Faceți clic dreapta pe disc
+3. Selectați "Convert to Dynamic Disk"
+4. Selectați discuri
+5. Faceți clic "OK"
+\`\`\`
+
+---
+
+## Partiții și Volumuri
+
+### Crearea unei Partiții
+
+\`\`\`
+1. Deschideți Disk Management
+2. Faceți clic dreapta pe spațiu nealocat
+3. Selectați "New Simple Volume"
+4. Setați dimensiune: 100 GB
+5. Atribuiți literă unitate: D:
+6. Formatați (NTFS)
+7. Finalizați
+\`\`\`
+
+### Redimensionare Partiție
+
+\`\`\`
+1. Faceți clic dreapta pe volum
+2. Selectați "Extend Volume" sau "Shrink Volume"
+3. Setați noua dimensiune
+4. Faceți clic "OK"
+\`\`\`
+
+---
+
+## RAID Levels
+
+### RAID 0 - Striping
+- **Beneficii:** ⚡ Performanță maximă
+- **Dezavantaje:** ❌ Fără redundanță
+- **Minim discuri:** 2
+- **Capacitate:** Suma tuturor discurilor
+
+### RAID 1 - Mirroring
+- **Beneficii:** 🔐 Redundanță completă
+- **Dezavantaje:** 📉 50% din capacitate pentru mirror
+- **Minim discuri:** 2
+- **Capacitate:** Jumătate din suma discurilor
+
+### RAID 5 - Striping cu Parity
+- **Beneficii:** ⚖️ Balanță performanță/redundanță
+- **Dezavantaje:** 🐢 Reconstrucție lentă
+- **Minim discuri:** 3
+- **Capacitate:** Suma - 1 disc (parity)
+
+### Configurare RAID 5
+
+\`\`\`
+1. Deschideți Disk Management
+2. Faceți clic dreapta pe disc
+3. Selectați "New RAID-5 Volume"
+4. Selectați 3+ discuri
+5. Setați dimensiune
+6. Atribuiți literă unitate
+7. Formatați
+8. Finalizați
+\`\`\`
+
+---
+
+## Configurare RAID 5 - Vizualizare
+
+\`\`\`
+Configurare RAID 5 (3 discuri × 1 TB)
+│
+├─ Disc 1: 1 TB
+│  ├─ Data Block A
+│  ├─ Data Block D
+│  └─ Parity Block G
+│
+├─ Disc 2: 1 TB
+│  ├─ Data Block B
+│  ├─ Data Block E
+│  └─ Parity Block H
+│
+└─ Disc 3: 1 TB
+   ├─ Data Block C
+   ├─ Data Block F
+   └─ Parity Block I
+
+Capacitate totală: 2 TB (1 TB pentru parity)
+Redundanță: 1 disc poate fi defect
+\`\`\`
+
+---
+
+## DiskPart - Command-line Management
+
+### Comenzi DiskPart Utile
+
+\`\`\`
+# Deschidere DiskPart
+diskpart
+
+# Listare discuri
+list disk
+
+# Selectare disc
+select disk 1
+
+# Inițializare disc
+clean
+
+# Creare partiție
+create partition primary size=10240
+
+# Formatare
+format fs=ntfs label="Data"
+
+# Atribuire literă unitate
+assign letter=D
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Listare discuri
+Get-Disk
+
+# Inițializare disc
+Initialize-Disk -Number 1 -PartitionStyle GPT
+
+# Creare partiție
+New-Partition -DiskNumber 1 -Size 10GB -AssignDriveLetter
+
+# Formatare
+Format-Volume -DriveLetter D -FileSystem NTFS -NewFileSystemLabel "Data"
+
+# Creare RAID 5
+New-StoragePool -FriendlyName "RAID5Pool" -StorageSubsystemFriendlyName "Storage Spaces" -PhysicalDisks (Get-PhysicalDisk -CanPool $true)
+
+# Verificare spațiu disc
+Get-Volume | Select-Object DriveLetter, Size, SizeRemaining
+\`\`\`
+`
+  },
+  "module-9": {
+    title: "Module 9: Integrare Client Windows 11",
+    sections: [
+      { title: "Integrarea Clientului Windows 11", description: "Pași alăturare domeniu, configurare rețea, și verificare conectivitate" },
+      { title: "Gestionare Remotă cu RSAT", description: "Instalare RSAT, utilizare tools, și administrare remotă" },
+      { title: "Remote Desktop: Activare și Configurare", description: "Activare RDS pe client, configurare permisiuni, și conectare" }
+    ],
+    content: `# Module 9: Integrare Client Windows 11
+
+## Pași de Alăturare la Domeniu
+
+### Pasul 1: Pregătire Client Windows 11
+
+**Cerințe:**
+- ✓ Windows 11 Professional, Enterprise sau Education
+- ✓ Conectivitate de rețea la domeniu
+- ✓ Credențiale Administrator local
+- ✓ Acces la Domain Controller
+
+### Pasul 2: Configurare Rețea
+
+\`\`\`
+1. Deschideți Settings → Network & Internet
+2. Faceți clic pe "Change adapter options"
+3. Faceți clic dreapta pe adaptor → Properties
+4. Selectați "Internet Protocol Version 4 (TCP/IPv4)"
+5. Faceți clic pe Properties
+6. Setați:
+   - IP Address: 192.168.1.50
+   - Subnet Mask: 255.255.255.0
+   - Default Gateway: 192.168.1.10
+   - DNS Server: 192.168.1.10
+7. Faceți clic "OK"
+\`\`\`
+
+### Pasul 3: Alăturare la Domeniu
+
+\`\`\`
+1. Deschideți Settings → System → About
+2. Faceți clic pe "Rename this PC (advanced)"
+3. Faceți clic pe "Change"
+4. Sub "Member of" selectați "Domain"
+5. Introduceți domain name: company.local
+6. Faceți clic "OK"
+7. Introduceți credențiale Administrator domeniu
+8. Faceți clic "OK" și restartați
+\`\`\`
+
+### Pasul 4: Verificare Alăturare
+
+\`\`\`
+După restart:
+1. Conectare cu cont domeniu: COMPANY\\username
+2. Deschideți Command Prompt
+3. Rulați: whoami
+4. Ar trebui să afișeze: COMPANY\\username
+\`\`\`
+
+---
+
+## RSAT - Remote Server Administration Tools
+
+### Instalare RSAT pe Windows 11
+
+\`\`\`
+1. Deschideți Settings → Apps → Optional features
+2. Faceți clic pe "Add an optional feature"
+3. Căutați "RSAT"
+4. Selectați "RSAT: Active Directory Domain Services and Lightweight Directory Services Tools"
+5. Faceți clic "Install"
+6. Restartați
+\`\`\`
+
+### Utilizare RSAT
+
+După instalare, puteți accesa:
+- 👥 Active Directory Users and Computers
+- 📋 Group Policy Management
+- 🌐 DNS Manager
+- 📡 DHCP Manager
+- 💾 Disk Management
+- 📊 Event Viewer (remote)
+
+---
+
+## Topologie Integrare Client
+
+\`\`\`
+Domain: company.local
+│
+├─ Domain Controller (192.168.1.10)
+│  ├─ Active Directory
+│  ├─ DNS Server
+│  └─ DHCP Server
+│
+├─ Client Windows 11 (192.168.1.50)
+│  ├─ Domain: company.local
+│  ├─ DNS: 192.168.1.10
+│  └─ User: COMPANY\\jsmith
+│
+├─ Client Windows 11 (192.168.1.51)
+│  ├─ Domain: company.local
+│  ├─ DNS: 192.168.1.10
+│  └─ User: COMPANY\\jdoe
+│
+└─ Client Windows 11 (192.168.1.52)
+   ├─ Domain: company.local
+   ├─ DNS: 192.168.1.10
+   └─ User: COMPANY\\asmith
+\`\`\`
+
+---
+
+## Troubleshooting Conectivitate
+
+### Problema: Nu pot conecta la domeniu
+
+**Soluții:**
+1. Verificați conectivitatea de rețea: \`ping 192.168.1.10\`
+2. Verificați DNS: \`nslookup company.local\`
+3. Verificați credențiale Administrator
+4. Verificați dacă Domain Controller este online
+5. Resetați conexiunea de rețea și încercați din nou
+
+### Problema: Nu pot conecta cu cont domeniu
+
+**Soluții:**
+1. Verificați dacă contul utilizatorului există în AD
+2. Verificați dacă computerul este în domeniu: \`whoami /all\`
+3. Resetați parola utilizatorului în ADUC
+4. Ștergeți computerul din domeniu și alăturați din nou
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Verificare domeniu
+Get-ComputerInfo | Select-Object CsDomain
+
+# Alăturare la domeniu
+Add-Computer -DomainName "company.local" -Credential (Get-Credential) -Restart
+
+# Verificare utilizator conectat
+whoami
+
+# Listare grupuri utilizator
+whoami /groups
+
+# Testare conectivitate DNS
+Test-NetConnection -ComputerName "company.local" -Port 53
+
+# Ștergere din domeniu
+Remove-Computer -UnjoinDomainCredential (Get-Credential) -Restart
+\`\`\`
+`
+  },
+  "module-10": {
+    title: "Module 10: Mentenanță și Best Practices",
+    sections: [
+      { title: "Mentenanță și Best Practices", description: "Strategie backup 3-2-1, hardening, monitorizare, și ciclu viață server" },
+      { title: "Laboratoare Hands-On: Exerciții Practice", description: "4 exerciții practice: utilizatori/grupuri, file server, GPO, și monitoring" },
+      { title: "Troubleshooting & FAQ: Probleme și Soluții", description: "Probleme comune, soluții, și diagnostic" },
+      { title: "Video Tutorials: Resurse Video Externe", description: "Colecție linkuri video YouTube pentru fiecare topic" },
+      { title: "Glosar: Termeni și Acronime", description: "Dicționar termeni Windows Server și acronime comune" }
+    ],
+    content: `# Module 10: Mentenanță și Best Practices
+
+## Best Practices - Backup și Disaster Recovery
+
+### Strategie Backup 3-2-1
+
+- **3** copii ale datelor (original + 2 backup-uri)
+- **2** medii diferite (HDD + cloud)
+- **1** copie offsite (cloud sau locație diferită)
+
+### Implementare Backup
+
+#### Backup Zilnic
+\`\`\`
+- Backup incremental la 22:00
+- Stocare local (NAS)
+- Retenție: 7 zile
+\`\`\`
+
+#### Backup Săptămânal
+\`\`\`
+- Backup complet duminică
+- Stocare cloud (Azure, AWS)
+- Retenție: 4 săptămâni
+\`\`\`
+
+#### Testare Restaurare
+\`\`\`
+- Lunar - testați restaurarea
+- Verificați integritate date
+- Documentați rezultate
+\`\`\`
+
+---
+
+## Best Practices - Securitate
+
+### Hardening Windows Server
+
+#### 1. Actualizări de Securitate
+\`\`\`
+- Instalați lunar (Patch Tuesday)
+- Testați pe test server mai întâi
+- Planificați downtime
+\`\`\`
+
+#### 2. Firewall Windows
+\`\`\`
+- Activați pe toate serverele
+- Deschideți doar porturi necesare
+- Monitorizați blocked connections
+\`\`\`
+
+#### 3. Politici de Parolă
+\`\`\`
+- Lungime minimă: 12 caractere
+- Complexitate: Majuscule, minuscule, cifre, caractere speciale
+- Expirare: 90 zile
+- Istoric: 5 parole anterioare
+\`\`\`
+
+#### 4. Audit Logging
+\`\`\`
+- Activați audit pentru: Logon, Account Management, Object Access
+- Monitorizați Event Log zilnic
+- Alertați pe failed logons
+\`\`\`
+
+---
+
+## Best Practices - Monitorizare
+
+### Metrici Critice
+
+| Metrica | Normal | Alertă |
+|---------|--------|--------|
+| CPU | < 80% | > 90% |
+| RAM | > 20% | < 10% |
+| Disk | > 20% | < 10% |
+| Network | < 80% | > 90% |
+
+### Alertare Proactivă
+
+\`\`\`
+1. Configurați Performance Monitor
+2. Setați threshold-uri
+3. Configurați notificări email
+4. Testați alertele
+\`\`\`
+
+---
+
+## Laboratoare Hands-On
+
+### Exercițiu 1: Creare Utilizatori și Grupuri
+
+\`\`\`
+1. Creați 5 utilizatori în AD
+2. Creați 2 grupuri
+3. Adăugați utilizatori în grupuri
+4. Testați logon cu conturi de utilizator
+\`\`\`
+
+### Exercițiu 2: Configurare File Server
+
+\`\`\`
+1. Creați 3 partajări de fișiere
+2. Setați permisiuni NTFS și Share
+3. Testați acces din client
+4. Testați Shadow Copies
+\`\`\`
+
+### Exercițiu 3: Configurare GPO
+
+\`\`\`
+1. Creați GPO pentru politică de parolă
+2. Creați GPO pentru folder redirection
+3. Legați GPO-urile la OU-uri
+4. Testați aplicare pe client
+\`\`\`
+
+### Exercițiu 4: Monitorizare Server
+
+\`\`\`
+1. Configurați Performance Monitor
+2. Creați Data Collector Set
+3. Rulați test de încărcare
+4. Analizați rezultate
+\`\`\`
+
+---
+
+## Troubleshooting Common Issues
+
+### Problema: Utilizator nu poate conecta la domeniu
+
+**Soluție:**
+1. Verificați dacă cont există în AD
+2. Resetați parola
+3. Verificați dacă computerul este în domeniu
+4. Verificați conectivitate DNS
+
+### Problema: Permisiuni nu funcționează corect
+
+**Soluție:**
+1. Verificați permisiuni NTFS și Share
+2. Verificați moștenire permisiuni
+3. Rulați: \`gpupdate /force\`
+4. Testați din alt cont
+
+### Problema: Server lent
+
+**Soluție:**
+1. Verificați CPU și RAM în Task Manager
+2. Verificați disk space
+3. Verificați network connectivity
+4. Analizați Event Log pentru erori
+
+---
+
+## Ciclu de Viață Server
+
+\`\`\`
+Planificare → Instalare → Configurare → Operare → Mentenanță → Upgrade/Decommission
+   ↓            ↓            ↓           ↓          ↓              ↓
+  6 luni      1 lună       2 săptămâni  Zilnic    Lunar/Trimestrial  Anual
+\`\`\`
+
+---
+
+## Comenzi PowerShell Utile
+
+\`\`\`powershell
+# Backup Active Directory
+wbadmin start backup -backupTarget:E: -include:systemstate -quiet
+
+# Verificare disk space
+Get-Volume | Select-Object DriveLetter, Size, SizeRemaining
+
+# Verificare servicii critice
+Get-Service | Where-Object {$_.Name -match "AD|DNS|DHCP"} | Select-Object Name, Status
+
+# Creare raport utilizatori
+Get-ADUser -Filter * | Export-Csv -Path "C:\\Reports\\Users.csv"
+
+# Verificare actualizări disponibile
+Get-WindowsUpdate
+
+# Backup GPO
+Backup-GPO -All -Path "C:\\Backups\\GPO"
+\`\`\`
+`
+  }
+};
+
+export default function ModuleContent() {
+  const [match, params] = useRoute("/module/:id");
+  const [, setLocation] = useLocation();
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+
+  if (!match) {
+    return (
+      <Layout>
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Modul nu a fost găsit</p>
+          <Button onClick={() => setLocation("/learning-path")} className="mt-4">
+            Înapoi la Traseu de Învățare
+          </Button>
+        </div>
+      </Layout>
+    );
+  }
+
+  const moduleId = params?.id as string;
+  const module = moduleContents[moduleId];
+
+  if (!module) {
+    return (
+      <Layout>
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">Modul nu a fost găsit</p>
+          <Button onClick={() => setLocation("/learning-path")} className="mt-4">
+            Înapoi la Traseu de Învățare
+          </Button>
+        </div>
+      </Layout>
+    );
+  }
+
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
+  return (
+    <Layout>
+      <div className="space-y-8">
+        {/* Header */}
+        <div className="space-y-4">
+          <Button
+            variant="ghost"
+            onClick={() => setLocation("/learning-path")}
+            className="mb-4"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Înapoi la Traseu de Învățare
+          </Button>
+          <h1 className="text-4xl font-bold text-foreground">{module.title}</h1>
+          <p className="text-lg text-muted-foreground">
+            Conținut profesional complet din PDF-uri VDAB
+          </p>
+        </div>
+
+        {/* Main Content - Formatted Markdown */}
+        <Card className="p-8 bg-card border-border">
+          <div className="prose prose-sm max-w-none dark:prose-invert">
+            <Markdown
+              options={{
+                overrides: {
+                  h1: { component: "h1", props: { className: "text-3xl font-bold mt-6 mb-4 text-foreground" } },
+                  h2: { component: "h2", props: { className: "text-2xl font-bold mt-6 mb-3 text-foreground border-b pb-2" } },
+                  h3: { component: "h3", props: { className: "text-xl font-semibold mt-4 mb-2 text-foreground" } },
+                  p: { component: "p", props: { className: "mb-3 text-foreground leading-relaxed" } },
+                  ul: { component: "ul", props: { className: "list-disc list-inside mb-3 space-y-1 text-foreground" } },
+                  ol: { component: "ol", props: { className: "list-decimal list-inside mb-3 space-y-1 text-foreground" } },
+                  li: { component: "li", props: { className: "text-foreground" } },
+                  code: { component: "code", props: { className: "bg-muted px-2 py-1 rounded text-sm font-mono text-foreground" } },
+                  pre: { component: "pre", props: { className: "bg-muted p-4 rounded-lg overflow-x-auto mb-3 border border-border" } },
+                  table: { component: "table", props: { className: "w-full border-collapse mb-3 border border-border" } },
+                  th: { component: "th", props: { className: "bg-muted px-3 py-2 text-left font-semibold border border-border text-foreground" } },
+                  td: { component: "td", props: { className: "px-3 py-2 border border-border text-foreground" } },
+                  blockquote: { component: "blockquote", props: { className: "border-l-4 border-primary pl-4 italic text-muted-foreground my-3" } },
+                  hr: { component: "hr", props: { className: "my-6 border-border" } },
+                }
+              }}
+            >
+              {module.content}
+            </Markdown>
+          </div>
+        </Card>
+
+        {/* Sections */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-foreground">Secțiuni incluse în acest modul</h2>
+          {module.sections.map((section, index) => (
+            <Card key={index} className="p-4 bg-card border-border hover:border-primary/50 transition-colors">
+              <button
+                onClick={() => toggleSection(section.title)}
+                className="w-full flex items-center justify-between text-left"
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                    <span className="font-semibold text-foreground">{section.title}</span>
+                  </div>
+                  {expandedSections[section.title] && (
+                    <p className="text-sm text-muted-foreground mt-2 ml-7">{section.description}</p>
+                  )}
+                </div>
+                {expandedSections[section.title] ? (
+                  <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-2" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0 ml-2" />
+                )}
+              </button>
+            </Card>
+          ))}
+        </div>
+
+        {/* Navigation */}
+        <div className="flex gap-4">
+          <Button
+            variant="outline"
+            onClick={() => setLocation("/learning-path")}
+            className="flex-1"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Înapoi la Traseu
+          </Button>
+        </div>
+      </div>
+    </Layout>
+  );
+}
