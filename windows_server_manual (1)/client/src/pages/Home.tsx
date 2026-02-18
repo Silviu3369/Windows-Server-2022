@@ -16,6 +16,7 @@ export default function Home() {
       <div className="space-y-10">
         <div className="space-y-4 text-center py-6">
           <h1 className="text-4xl font-bold text-foreground">Windows Server 2022 Manual</h1>
+          <p className="text-sm font-semibold text-blue-700">Deployment marker: 2026-02-18 / build v2</p>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Complete training manual aligned with the course PDFs, Microsoft Learn documentation, practical labs, quizzes, and module-specific video references.
           </p>
